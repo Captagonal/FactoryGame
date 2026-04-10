@@ -38,7 +38,7 @@ public partial class Conveyor : StaticBody3D
 		{
 			var current = items[i];
 			Item item = current.GetNode<Item>("Item");
-			item.Position = Vector3.Zero; // Keep item centered on the path
+			item.Position = new Vector3(0, item.getSize()/2,0);
 			item.Rotation = Vector3.Zero; // Keep item from rotating
 			float nextProgress = current.Progress + (speed * (float)delta);
 			if (i > 0)

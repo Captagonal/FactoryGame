@@ -45,7 +45,7 @@ transform = Transform3D(0.24209121, 0, 0.97025347, 0, 1, 0, -0.97025347, 0, 0.24
 transform = Transform3D(-0.99991816, 0, 0.012792866, 0, 1, 0, -0.012792866, 0, -0.99991816, 2.662111, 0, 2.9931355)
 
 [node name="Spawner" parent="." unique_id=898092496 instance=ExtResource("3_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.4991019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.2730565)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=680814678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026263475, 0.030652046, 0.051407814)
