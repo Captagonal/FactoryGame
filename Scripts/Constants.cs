@@ -1,0 +1,5 @@
+using Godot;
+class Constants
+{
+    
+}   

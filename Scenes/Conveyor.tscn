@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cl143se62go3d"]
+
+[ext_resource type="Script" uid="uid://bwadoo44fxxku" path="res://Scripts/Conveyor.cs" id="1_necmr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_otof8"]
+size = Vector3(0.3, 0.535, 1.105)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_necmr"]
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_72qtc"]
+material = SubResource("StandardMaterial3D_necmr")
+size = Vector3(0.75, 0.08, 1.29)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hdv65"]
+size = Vector3(0.7871094, 0.08227539, 2.4101563)
+
+[sub_resource type="Curve3D" id="Curve3D_necmr"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.205),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lron"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.35906908, 0.35906908, 0.35906908, 1)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5hsuk"]
+material = SubResource("StandardMaterial3D_8lron")
+size = Vector3(0.17, 0.23, 0.27)
+
+[node name="Node3D" type="StaticBody3D" unique_id=746744939]
+script = ExtResource("1_necmr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=697515509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.08751109, 0)
+mesh = SubResource("BoxMesh_otof8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1766117766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.34954, 0)
+mesh = SubResource("BoxMesh_72qtc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1621203279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35418868, 0)
+shape = SubResource("BoxShape3D_hdv65")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=850023270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -1.0839097)
+curve = SubResource("Curve3D_necmr")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1690715899]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 0)
+v_offset = 0.14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D" unique_id=1976753696]
+mesh = SubResource("BoxMesh_5hsuk")
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Path3D" unique_id=618285125]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 0.8221424)
+progress = 0.81584996
+v_offset = 0.14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D2" unique_id=900124455]
+mesh = SubResource("BoxMesh_5hsuk")
+
+[node name="PathFollow3D3" type="PathFollow3D" parent="Path3D" unique_id=1501787197]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 1.2693621)
+progress = 1.2764744
+v_offset = 0.14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D3" unique_id=1434022481]
+mesh = SubResource("BoxMesh_5hsuk")

@@ -1,3 +1,27 @@
 [gd_scene format=3 uid="uid://dknaoidi0cjlc"]
 
+[ext_resource type="PackedScene" uid="uid://cl143se62go3d" path="res://Scenes/Conveyor.tscn" id="1_a202f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_noarx"]
+sky_material = SubResource("ProceduralSkyMaterial_a202f")
+
+[sub_resource type="Environment" id="Environment_a0tk4"]
+background_mode = 2
+sky = SubResource("Sky_noarx")
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="Node3D" type="Node3D" unique_id=1244220572]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=997680680]
+environment = SubResource("Environment_a0tk4")
+
+[node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2068646158]
+transform = Transform3D(-0.014860605, 0.22552921, -0.97412306, 0.0034401305, 0.9742364, 0.22550297, 0.99988365, 0, -0.015253593, -1.733183, 1.2676915, 0)
+fov = 78.84995
