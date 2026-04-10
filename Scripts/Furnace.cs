@@ -12,14 +12,14 @@ public partial class Furnace : Machine
 
 	public override void ProcessItem(Item item)
 	{
-		GD.Print("Processing item of type: " + item.getType());
+		// GD.Print("Processing item of type: " + item.getType());
 		base.ProcessItem(item);
 		// Example processing logic: If the item is wood, turn it into charcoal
 		if (item.getType() == ItemType.Wood)
 		{
 			item.setType(ItemType.Charcoal);
 		
-			GD.Print("Processed wood into charcoal!");
+			// GD.Print("Processed wood into charcoal!");
 			// You can add more processing logic for other item types here
 		}
 	}

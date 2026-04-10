@@ -5,3 +5,4 @@ albedo_color = Color(0.26982614, 0.17355925, 0.09651493, 1)
 
 [resource]
 material = SubResource("StandardMaterial3D_kgaca")
+size = Vector3(0.5, 0.5, 0.5)

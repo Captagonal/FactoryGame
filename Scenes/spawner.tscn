@@ -59,6 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -1.2676408)
 shape = SubResource("SphereShape3D_f333s")
 
 [node name="Timer" type="Timer" parent="." unique_id=1121166706]
+wait_time = 0.06
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="Spawn"]

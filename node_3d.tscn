@@ -17,6 +17,13 @@ sky = SubResource("Sky_noarx")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r3fl7"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector2(50, 50)
+
 [node name="Node3D" type="Node3D" unique_id=1244220572]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=997680680]
@@ -25,7 +32,7 @@ environment = SubResource("Environment_a0tk4")
 [node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2068646158]
-transform = Transform3D(-0.07705766, 0.22509202, -0.97128564, 0.0034401312, 0.9742364, 0.22550294, 0.9970207, 0.0140353795, -0.07584673, -2.0546207, 1.605265, 0.67181695)
+transform = Transform3D(0.11550017, 0.22360796, -0.9678116, 0.0034401324, 0.9742364, 0.22550295, 0.9933015, -0.029375032, 0.11175524, -2.6362476, 1.605265, 0.67181695)
 fov = 78.84995
 
 [node name="Furnace" parent="." unique_id=262583358 instance=ExtResource("2_noarx")]
@@ -39,3 +46,7 @@ transform = Transform3D(-0.99991816, 0, 0.012792866, 0, 1, 0, -0.012792866, 0, -
 
 [node name="Spawner" parent="." unique_id=898092496 instance=ExtResource("3_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.4991019)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=680814678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026263475, 0.030652046, 0.051407814)
+mesh = SubResource("PlaneMesh_r3fl7")

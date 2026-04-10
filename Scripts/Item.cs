@@ -4,11 +4,13 @@ using System;
 public partial class Item : RigidBody3D
 {
 	private ItemType type;
-	public static Item newItem(ItemType type)
+	private float size = 0.5f;
+	public static Item newItem(ItemType type, float size = 0.5f)
 	{
 		PackedScene scene = GD.Load<PackedScene>("res://Scenes/Item.tscn");
 		Item item = scene.Instantiate<Item>();
 		item.setType(type);	
+		item.setSize(size);
 		item.Name = "Item"	;
 		return item;
 	}
@@ -48,6 +50,13 @@ public partial class Item : RigidBody3D
 	{
 		return type;
 	}
+	public float getSize()
+	{
+		return size;
+	}
+	public void setSize(float newSize)
+	{
+		size = newSize;	}
 }
 
 public enum ItemType
