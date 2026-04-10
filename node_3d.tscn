@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cl143se62go3d" path="res://Scenes/Conveyor.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://di46jbj14qeve" path="res://Scenes/player.tscn" id="4_r3fl7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,16 +25,15 @@ albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
 material = SubResource("StandardMaterial3D_a0tk4")
 size = Vector2(50, 50)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r3fl7"]
+points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
+
 [node name="Node3D" type="Node3D" unique_id=1244220572]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=997680680]
 environment = SubResource("Environment_a0tk4")
 
 [node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=2068646158]
-transform = Transform3D(0.11550017, 0.22360796, -0.9678116, 0.0034401324, 0.9742364, 0.22550295, 0.9933015, -0.029375032, 0.11175524, -2.6362476, 1.605265, 0.67181695)
-fov = 78.84995
 
 [node name="Furnace" parent="." unique_id=262583358 instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.4208333)
@@ -48,5 +48,13 @@ transform = Transform3D(-0.99991816, 0, 0.012792866, 0, 1, 0, -0.012792866, 0, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.2730565)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=680814678]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026263475, 0.030652046, 0.051407814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
 mesh = SubResource("PlaneMesh_r3fl7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=188237971]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=521016876]
+shape = SubResource("ConvexPolygonShape3D_r3fl7")
+
+[node name="Player" parent="." unique_id=611534091 instance=ExtResource("4_r3fl7")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3, 2, 0)
