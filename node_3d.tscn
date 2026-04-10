@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dknaoidi0cjlc"]
 
 [ext_resource type="PackedScene" uid="uid://cl143se62go3d" path="res://Scenes/Conveyor.tscn" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="3_a0tk4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,5 +25,17 @@ environment = SubResource("Environment_a0tk4")
 [node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2068646158]
-transform = Transform3D(-0.014860605, 0.22552921, -0.97412306, 0.0034401305, 0.9742364, 0.22550297, 0.99988365, 0, -0.015253593, -1.733183, 1.2676915, 0)
+transform = Transform3D(-0.07705766, 0.22509202, -0.97128564, 0.0034401312, 0.9742364, 0.22550294, 0.9970207, 0.0140353795, -0.07584673, -2.0546207, 1.605265, 0.67181695)
 fov = 78.84995
+
+[node name="Furnace" parent="." unique_id=262583358 instance=ExtResource("2_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.4208333)
+
+[node name="Node3D2" parent="." unique_id=251567157 instance=ExtResource("1_a202f")]
+transform = Transform3D(0.24209121, 0, 0.97025347, 0, 1, 0, -0.97025347, 0, 0.24209121, 1.2589195, -0.044384003, 4.0130754)
+
+[node name="Node3D3" parent="." unique_id=1463896420 instance=ExtResource("1_a202f")]
+transform = Transform3D(-0.99991816, 0, 0.012792866, 0, 1, 0, -0.012792866, 0, -0.99991816, 2.662111, 0, 2.9931355)
+
+[node name="Spawner" parent="." unique_id=898092496 instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.4991019)

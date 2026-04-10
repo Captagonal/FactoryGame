@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://drdvrc53uh45c"]
+
+[ext_resource type="Script" uid="uid://clt5g8b00s050" path="res://Scripts/Furnace.cs" id="1_8n3ax"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8n3ax"]
+size = Vector3(0.3, 0.535, 1.105)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5n7jk"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_bvuhw"]
+material = SubResource("StandardMaterial3D_5n7jk")
+size = Vector3(0.75, 0.08, 1.29)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6lpxl"]
+size = Vector3(0.7871094, 0.08227539, 2.4101563)
+
+[sub_resource type="Curve3D" id="Curve3D_00xch"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.205),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwq71"]
+radius = 0.25
+
+[node name="Furnace" type="StaticBody3D" unique_id=262583358]
+script = ExtResource("1_8n3ax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1489421046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.08751109, 0)
+mesh = SubResource("BoxMesh_8n3ax")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1014211204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.34954, 0)
+mesh = SubResource("BoxMesh_bvuhw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1849215485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35418868, 0)
+shape = SubResource("BoxShape3D_6lpxl")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1607667687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -1.0839097)
+curve = SubResource("Curve3D_00xch")
+
+[node name="Out" type="Area3D" parent="." unique_id=455809972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, 1.2913222)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=612178531]
+shape = SubResource("SphereShape3D_hwq71")
+
+[node name="In" type="Area3D" parent="." unique_id=1084897891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -1.2676408)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1821404118]
+shape = SubResource("SphereShape3D_hwq71")

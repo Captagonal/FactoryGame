@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-public partial class Conveyor : StaticBody3D
+public partial class Spawner : StaticBody3D
 {
 	// Called when the node enters the scene tree for the first time.
 	public Path3D path;
@@ -35,7 +35,6 @@ public partial class Conveyor : StaticBody3D
 				pathFollow3D.ProgressRatio += (float)delta * speed;
 				if (pathFollow3D.ProgressRatio >= .98)
 				{
-					GD.Print("Attempting to transfer item from " + Name);
 					// nextConveyor = Out.GetOverlappingAreas().FirstOrDefault().GetParent() as Conveyor;
 					// GD.Print("Next Conveyor: " + nextConveyor.Name);
 					// pathFollow3D.ProgressRatio = 0;
@@ -47,14 +46,21 @@ public partial class Conveyor : StaticBody3D
 			}
 		}
 	}
+
+public void Spawn(){
+	SpawnItem(ItemType.Wood);
+}
+	public void SpawnItem(ItemType type)
+	{
+		Item newItem = Item.newItem(type);
+		AddChild(newItem);
+		TakeInItem(newItem);
+	}
 private void TryTransferItem(PathFollow3D pathFollow)
 {
-	
 	// 1. Get the first overlapping area safely
 	if (Out == null|| Out.GetOverlappingAreas().Count == 0)
 	{
-		GD.Print(Out==null);
-		GD.Print("No overlapping areas at the 'Out' point of " + Name);
 		return;
 	}
 	

@@ -24,15 +24,8 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lron"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.35906908, 0.35906908, 0.35906908, 1)
-roughness = 0.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_5hsuk"]
-material = SubResource("StandardMaterial3D_8lron")
-size = Vector3(0.17, 0.23, 0.27)
+[sub_resource type="SphereShape3D" id="SphereShape3D_necmr"]
+radius = 0.25
 
 [node name="Node3D" type="StaticBody3D" unique_id=746744939]
 script = ExtResource("1_necmr")
@@ -53,25 +46,14 @@ shape = SubResource("BoxShape3D_hdv65")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -1.0839097)
 curve = SubResource("Curve3D_necmr")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1690715899]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 0)
-v_offset = 0.14
+[node name="Out" type="Area3D" parent="." unique_id=935635819]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, 1.2913222)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D" unique_id=1976753696]
-mesh = SubResource("BoxMesh_5hsuk")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=764645532]
+shape = SubResource("SphereShape3D_necmr")
 
-[node name="PathFollow3D2" type="PathFollow3D" parent="Path3D" unique_id=618285125]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 0.8221424)
-progress = 0.81584996
-v_offset = 0.14
+[node name="In" type="Area3D" parent="." unique_id=223753479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -1.2676408)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D2" unique_id=900124455]
-mesh = SubResource("BoxMesh_5hsuk")
-
-[node name="PathFollow3D3" type="PathFollow3D" parent="Path3D" unique_id=1501787197]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.14, 1.2693621)
-progress = 1.2764744
-v_offset = 0.14
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D3" unique_id=1434022481]
-mesh = SubResource("BoxMesh_5hsuk")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1642298061]
+shape = SubResource("SphereShape3D_necmr")

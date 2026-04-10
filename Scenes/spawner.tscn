@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://nydjkq8gm70v"]
+
+[ext_resource type="Script" uid="uid://br1scuv4uyoej" path="res://Scripts/Spawner.cs" id="1_2bop2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0dymf"]
+size = Vector3(0.3, 0.535, 1.105)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bop2"]
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mdv8j"]
+material = SubResource("StandardMaterial3D_2bop2")
+size = Vector3(0.75, 0.08, 1.29)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xhbpr"]
+size = Vector3(0.7871094, 0.08227539, 2.4101563)
+
+[sub_resource type="Curve3D" id="Curve3D_2ydn3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.205),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f333s"]
+radius = 0.25
+
+[node name="Spawner" type="StaticBody3D" unique_id=898092496]
+script = ExtResource("1_2bop2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=130797298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.08751109, 0)
+mesh = SubResource("BoxMesh_0dymf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1799854792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.34954, 0)
+mesh = SubResource("BoxMesh_mdv8j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=706206377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35418868, 0)
+shape = SubResource("BoxShape3D_xhbpr")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=466778101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -1.0839097)
+curve = SubResource("Curve3D_2ydn3")
+
+[node name="Out" type="Area3D" parent="." unique_id=1200402822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, 1.2913222)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=943575048]
+shape = SubResource("SphereShape3D_f333s")
+
+[node name="In" type="Area3D" parent="." unique_id=979294180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -1.2676408)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1523479064]
+shape = SubResource("SphereShape3D_f333s")
+
+[node name="Timer" type="Timer" parent="." unique_id=1121166706]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="Spawn"]
