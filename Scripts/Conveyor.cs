@@ -111,10 +111,9 @@ public partial class Conveyor : StaticBody3D
 			item.isProcessed = false; // Reset processed state for the next conveyor
 			pathFollow.QueueFree();
 		}
-		else
+		else if (nextArea?.GetParent() is Hub hub)
 		{
-			// Blocked at the end of the belt
-			pathFollow.ProgressRatio = 1.0f;
+			hub.intake(item);
 		}
 	}
 	public bool canFit(float size)

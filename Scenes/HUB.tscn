@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dec6r4oi7eegy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0511b"]
+size = Vector3(0.1, 0.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndhe5"]
+size = Vector3(1.0067139, 0.08227539, 1.0332336)
+
+[sub_resource type="BoxMesh" id="BoxMesh_psky8"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0511b"]
+albedo_color = Color(1, 0.03529412, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1cr6i"]
+radius = 0.25
+
+[node name="Hub" type="StaticBody3D" unique_id=1622989810]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1004406704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
+mesh = SubResource("BoxMesh_0511b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1220593375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 0.3711602, 0.0010528564)
+shape = SubResource("BoxShape3D_ndhe5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=46737702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
+mesh = SubResource("BoxMesh_psky8")
+surface_material_override/0 = SubResource("StandardMaterial3D_0511b")
+
+[node name="In" type="Area3D" parent="." unique_id=1331477506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1264087880]
+shape = SubResource("SphereShape3D_1cr6i")
+debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)
+
+[node name="In2" type="Area3D" parent="." unique_id=105779858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, 0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In2" unique_id=132373507]
+shape = SubResource("SphereShape3D_1cr6i")
+debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)
+
+[node name="In3" type="Area3D" parent="." unique_id=19117609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, -0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In3" unique_id=487158615]
+shape = SubResource("SphereShape3D_1cr6i")
+debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)
+
+[node name="In4" type="Area3D" parent="." unique_id=730842750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, -0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In4" unique_id=1352467245]
+shape = SubResource("SphereShape3D_1cr6i")
+debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)

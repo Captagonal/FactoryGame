@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://di46jbj14qeve" path="res://Scenes/player.tscn" id="2_pyidc"]
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="3_l8v81"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
+[ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_l8v81"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
 albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
@@ -49,3 +50,6 @@ transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=337689945]
 environment = SubResource("Environment_vvh5c")
+
+[node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
