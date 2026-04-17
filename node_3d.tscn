@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="3_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://di46jbj14qeve" path="res://Scenes/player.tscn" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_i5arm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -39,19 +40,19 @@ SpawnerScene = ExtResource("3_a0tk4")
 environment = SubResource("Environment_a0tk4")
 
 [node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53299, 0.4, -1.5081478)
 
 [node name="Furnace" parent="." unique_id=262583358 instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53299, 0.4, -0.5081477)
 
 [node name="Node3D2" parent="." unique_id=251567157 instance=ExtResource("1_a202f")]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0, 0.4, 2)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -2.53299, 0.4, 0.49185228)
 
 [node name="Node3D3" parent="." unique_id=1463896420 instance=ExtResource("1_a202f")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0.4, 2)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.5329901, 0.4, 0.49185228)
 
 [node name="Spawner" parent="." unique_id=898092496 instance=ExtResource("3_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53299, 0.4, -2.5081477)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=680814678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
@@ -64,3 +65,6 @@ shape = SubResource("ConvexPolygonShape3D_r3fl7")
 
 [node name="Player" parent="." unique_id=611534091 instance=ExtResource("4_r3fl7")]
 transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3, 2, 0)
+
+[node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

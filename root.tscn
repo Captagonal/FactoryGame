@@ -52,4 +52,6 @@ transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25
 environment = SubResource("Environment_vvh5c")
 
 [node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
+
+[connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]

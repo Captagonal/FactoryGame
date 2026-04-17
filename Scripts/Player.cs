@@ -50,6 +50,11 @@ public partial class Player : Node3D
 				targetedConveyor().RotateY(Mathf.DegToRad(90));
 			}
 		}
+		if (Input.IsActionJustPressed("Remove")){
+			if (isPointerConveyor()){
+				targetedConveyor().QueueFree();
+			}
+		}
 		if (Input.IsActionJustPressed("BuildMode"))
 		{
 			BuildMode = !BuildMode;
@@ -237,5 +242,13 @@ public partial class Player : Node3D
 		// GD.Print("Building " + type);
 		building = true;
 		buildType = type;
+	}
+
+	public void addToInventory(Item item){
+		if (inventory.ContainsKey(item.getType())){
+			inventory[item.getType()] += 1;
+		} else {
+			inventory[item.getType()] = 1;
+		}
 	}
 }

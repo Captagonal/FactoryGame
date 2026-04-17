@@ -114,6 +114,7 @@ public partial class Conveyor : StaticBody3D
 		else if (nextArea?.GetParent() is Hub hub)
 		{
 			hub.intake(item);
+			pathFollow.QueueFree();
 		}
 	}
 	public bool canFit(float size)
