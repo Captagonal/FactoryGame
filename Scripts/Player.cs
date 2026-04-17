@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 public partial class Player : Node3D
@@ -12,11 +13,13 @@ public partial class Player : Node3D
 	private Control InventoryUI, BuildUI;
 	private bool _isPlacingConveyor = false;
 	private bool BuildMode, Inventory = false;
+	private Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
 	public override void _Ready()
 	{
 		pointer = GetNode<Node3D>("pointer");
 		InventoryUI = GetNode<Control>("Inventory");
 		BuildUI = GetNode<Control>("BuildUI");
+		inventory.Add(ItemType.Wood, 50);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,11 +59,35 @@ public partial class Player : Node3D
 			Inventory = !Inventory;
 			if (Inventory){
 				BuildMode = false;
+				InventoryUI.GetNode<ItemList>("ItemList").Clear();
+				foreach (var item in inventory){
+					InventoryUI.GetNode<ItemList>("ItemList").AddItem(item.Key.ToString() + ": " + item.Value);
+				}
 			}
 		}
 
 		BuildUI.Visible = BuildMode;
 		InventoryUI.Visible = Inventory;
+
+		if (building){
+
+			if (Input.IsActionJustPressed("Accept") && !IsPointerOverUI()){
+				PackedScene machineScene = null;
+				switch (buildType){
+					case MachineType.Conveyor:
+						machineScene = GD.Load<PackedScene>("res://Scenes/Conveyor.tscn");
+						break;
+					case MachineType.Furnace:
+						machineScene = GD.Load<PackedScene>("res://Scenes/Funrace.tscn");
+						break;
+				}
+				if (machineScene != null) {
+					var MachineInstance = machineScene.Instantiate<Conveyor>();
+					GetParent().AddChild(MachineInstance);
+					MachineInstance.GlobalPosition = new Vector3(Mathf.Round(pointer.GlobalPosition.X), 0.4f, Mathf.Round(pointer.GlobalPosition.Z));
+				}
+			}
+		}
 		
 	}
 	public override void _Input(InputEvent @event)
@@ -112,7 +139,10 @@ public partial class Player : Node3D
 
 		Vector3 rayOrigin = camera3D.ProjectRayOrigin(mousePos);
 		Vector3 rayNormal = camera3D.ProjectRayNormal(mousePos);
-
+		if (groundPlane.IntersectsRay(rayOrigin, rayNormal) == null)
+		{
+			return pointer.GlobalPosition; // Avoid division by zero
+		}
 		Vector3 intersection = (Vector3)groundPlane.IntersectsRay(rayOrigin, rayNormal);
 
 		return intersection;
@@ -171,5 +201,12 @@ public partial class Player : Node3D
 			}
 		}
 		return null;
+	}
+	bool building = false;
+	MachineType buildType = MachineType.Conveyor;
+	public void Build(MachineType type){
+		// GD.Print("Building " + type);
+		building = true;
+		buildType = type;
 	}
 }

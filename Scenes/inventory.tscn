@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ynw2dgvpkw4d"]
+
+[ext_resource type="Theme" uid="uid://vjf8bqnts471" path="res://Theme.tres" id="1_wdn4f"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_k5gp2"]
+
+[node name="Inventory" type="Control" unique_id=556100264 groups=["UI"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1509140188]
+visible = false
+layout_mode = 0
+offset_left = 55.0
+offset_top = 57.0
+offset_right = 1099.0
+offset_bottom = 546.0
+texture = SubResource("CanvasTexture_k5gp2")
+
+[node name="ItemList" type="ItemList" parent="." unique_id=1171744583]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 96.0
+offset_right = 1097.0
+offset_bottom = 499.0
+theme = ExtResource("1_wdn4f")
+allow_search = false
+auto_width = true
+auto_height = true
+item_count = 4
+max_columns = 3
+same_column_width = true
+item_0/text = "Asda"
+item_1/text = "sdasdasd"
+item_2/text = "sadasdasdadasdasdasd"
+item_3/text = "asdadas"
