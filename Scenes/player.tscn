@@ -5,12 +5,13 @@
 [ext_resource type="Theme" uid="uid://vjf8bqnts471" path="res://Theme.tres" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://ynw2dgvpkw4d" path="res://Scenes/inventory.tscn" id="3_fkybt"]
 [ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scenes/BuildUi.cs" id="3_vgqql"]
+[ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="4_x3wgy"]
 
 [node name="Player" type="Node3D" unique_id=611534091]
 script = ExtResource("1_v0iea")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2048983511]
-transform = Transform3D(1, 0, 0, 0, 0.8571583, 0.51505303, 0, -0.51505303, 0.8571583, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="pointer" parent="." unique_id=678600973 instance=ExtResource("2_cvnsp")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
@@ -20,12 +21,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187, 0)
 target_position = Vector3(0, 2, 0)
 
 [node name="Inventory" parent="." unique_id=556100264 instance=ExtResource("3_fkybt")]
+visible = false
 
 [node name="ItemList" parent="Inventory" index="1" unique_id=1171744583]
 offset_left = 73.0
 offset_top = 103.0
 offset_right = 1095.0
 offset_bottom = 506.0
+icon_scale = 0.51
+fixed_icon_size = Vector2i(125, 125)
+item_0/icon = ExtResource("4_x3wgy")
 
 [node name="BuildUI" type="Control" parent="." unique_id=148947368 groups=["UI"]]
 visible = false

@@ -101,7 +101,7 @@ public partial class GameRunner : Node3D
 			{ "destination", (int)currentTask.destination },
 			{ "itemType", (int)currentTask.itemType },
 		};
-
+		saveData["Inventory"] = player.inventory;
 
 		saveFile.StoreVar(saveData);
 	}
