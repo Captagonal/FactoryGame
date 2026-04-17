@@ -5,6 +5,7 @@ public partial class Item : RigidBody3D
 {
 	private ItemType type;
 	private float size = 0.5f;
+	public bool isProcessed = false;
 	public static Item newItem(ItemType type, float size = 0.5f)
 	{
 		PackedScene scene = GD.Load<PackedScene>("res://Scenes/Item.tscn");
@@ -64,6 +65,8 @@ public enum ItemType
 	Wood,
 	Stone,
 	Iron,
+	IronOre,
 	Copper,
+	CopperOre,
 	Charcoal
 }

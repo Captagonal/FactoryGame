@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ciwh48x6p8p0e"]
+
+[ext_resource type="Script" uid="uid://mjn0myumhsln" path="res://MainMenu.cs" id="1_06t4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7vrkn"]
+line_spacing = 3.1
+paragraph_spacing = 0.325
+font_size = 75
+shadow_size = 14
+shadow_color = Color(0.7921569, 0, 0, 1)
+shadow_offset = Vector2(3.73, 5.73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fu7sn"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="Main Menu" type="Control" unique_id=220812868]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Label" type="Label" parent="." unique_id=1858416934]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 88.0
+offset_right = 441.0
+offset_bottom = 191.0
+text = "haiii"
+label_settings = SubResource("LabelSettings_7vrkn")
+uppercase = true
+
+[node name="Button" type="Button" parent="." unique_id=1176692335]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 263.0
+offset_right = 942.0
+offset_bottom = 436.0
+theme_override_font_sizes/font_size = 104
+text = "Load Game"
+icon = SubResource("CompressedTexture2D_fu7sn")
+
+[connection signal="pressed" from="Button" to="." method="LoadGame"]

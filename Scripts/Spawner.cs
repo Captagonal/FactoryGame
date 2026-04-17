@@ -5,9 +5,19 @@ using System.Linq;
 
 public partial class Spawner : Conveyor
 {
+
+	private ItemType itemTypeToSpawn = ItemType.Wood;
+	public void setItemType(ItemType type)
+	{
+		itemTypeToSpawn = type;
+	}
+	public ItemType getItemType()
+	{
+		return itemTypeToSpawn;
+	}
 	public void Spawn()
 	{
-		SpawnItem(ItemType.Wood);
+		SpawnItem(itemTypeToSpawn);
 	}
 	public void SpawnItem(ItemType type)
 	{
@@ -33,7 +43,7 @@ public partial class Spawner : Conveyor
 			AddChild(newItem);
 			TakeInItem(newItem);
 		}
-		
+
 	}
 
 }

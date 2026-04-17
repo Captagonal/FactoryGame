@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dknaoidi0cjlc"]
 
 [ext_resource type="PackedScene" uid="uid://cl143se62go3d" path="res://Scenes/Conveyor.tscn" id="1_a202f"]
+[ext_resource type="Script" uid="uid://crqfoey2donk5" path="res://Scripts/GameRunner.cs" id="1_jka67"]
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="3_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://di46jbj14qeve" path="res://Scenes/player.tscn" id="4_r3fl7"]
@@ -9,43 +10,48 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_noarx"]
+[sub_resource type="Sky" id="Sky_jka67"]
 sky_material = SubResource("ProceduralSkyMaterial_a202f")
 
 [sub_resource type="Environment" id="Environment_a0tk4"]
 background_mode = 2
-sky = SubResource("Sky_noarx")
+sky = SubResource("Sky_jka67")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
 albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r3fl7"]
-material = SubResource("StandardMaterial3D_a0tk4")
+material = SubResource("StandardMaterial3D_jka67")
 size = Vector2(50, 50)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r3fl7"]
 points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
 
 [node name="Node3D" type="Node3D" unique_id=1244220572]
+script = ExtResource("1_jka67")
+ConveyorScene = ExtResource("1_a202f")
+MachineScene = ExtResource("2_noarx")
+SpawnerScene = ExtResource("3_a0tk4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=997680680]
 environment = SubResource("Environment_a0tk4")
 
 [node name="Node3D" parent="." unique_id=746744939 instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="Furnace" parent="." unique_id=262583358 instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.4208333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1)
 
 [node name="Node3D2" parent="." unique_id=251567157 instance=ExtResource("1_a202f")]
-transform = Transform3D(0.24209121, 0, 0.97025347, 0, 1, 0, -0.97025347, 0, 0.24209121, 1.2589195, -0.044384003, 4.0130754)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0, 0.4, 2)
 
 [node name="Node3D3" parent="." unique_id=1463896420 instance=ExtResource("1_a202f")]
-transform = Transform3D(-0.99991816, 0, 0.012792866, 0, 1, 0, -0.012792866, 0, -0.99991816, 2.662111, 0, 2.9931355)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0.4, 2)
 
 [node name="Spawner" parent="." unique_id=898092496 instance=ExtResource("3_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020807028, 0, -2.2730565)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=680814678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)

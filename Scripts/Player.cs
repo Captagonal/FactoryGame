@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class Player : Node3D
 {
@@ -7,6 +8,8 @@ public partial class Player : Node3D
 	float CameraSensitivity = 0.005f;
 	private Vector3 _grabPointWorld;
 	private Vector3 _cameraStartPos;
+	private Path3D _currentPath;
+	private bool _isPlacingConveyor = false;
 	public override void _Ready()
 	{
 	}
@@ -23,9 +26,10 @@ public partial class Player : Node3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-	}
+		}
 	public override void _Input(InputEvent @event)
 	{
+		
 		Camera3D camera3D = GetNode<Camera3D>("Camera3D");
 
 		if (@event.IsActionPressed("Move"))

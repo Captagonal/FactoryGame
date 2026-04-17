@@ -2,64 +2,64 @@
 
 [ext_resource type="Script" uid="uid://br1scuv4uyoej" path="res://Scripts/Spawner.cs" id="1_2bop2"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_0dymf"]
-size = Vector3(0.3, 0.535, 1.105)
+[sub_resource type="BoxMesh" id="BoxMesh_2bop2"]
+size = Vector3(0.1, 0.8, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bop2"]
-diffuse_mode = 3
-specular_mode = 1
-roughness = 0.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_mdv8j"]
+size = Vector3(1.0067139, 0.08227539, 1.0332336)
 
-[sub_resource type="BoxMesh" id="BoxMesh_mdv8j"]
-material = SubResource("StandardMaterial3D_2bop2")
-size = Vector3(0.75, 0.08, 1.29)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xhbpr"]
-size = Vector3(0.7871094, 0.08227539, 2.4101563)
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhbpr"]
+radius = 0.25
 
 [sub_resource type="Curve3D" id="Curve3D_2ydn3"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.205),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.95568204),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_f333s"]
-radius = 0.25
+[sub_resource type="BoxMesh" id="BoxMesh_f333s"]
+size = Vector3(1, 0.1, 1)
 
-[node name="Spawner" type="StaticBody3D" unique_id=898092496]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bop2"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="Spawner" type="StaticBody3D" unique_id=898092496 groups=["Spawner"]]
 script = ExtResource("1_2bop2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=130797298]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.08751109, 0)
-mesh = SubResource("BoxMesh_0dymf")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1799854792]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.8674128, 0, 0.34954, 0)
-mesh = SubResource("BoxMesh_mdv8j")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=706206377]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35418868, 0)
-shape = SubResource("BoxShape3D_xhbpr")
-
-[node name="Path3D" type="Path3D" parent="." unique_id=466778101]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -1.0839097)
-curve = SubResource("Curve3D_2ydn3")
-
-[node name="Out" type="Area3D" parent="." unique_id=1200402822]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, 1.2913222)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=943575048]
-shape = SubResource("SphereShape3D_f333s")
-
-[node name="In" type="Area3D" parent="." unique_id=979294180]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -1.2676408)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1523479064]
-shape = SubResource("SphereShape3D_f333s")
 
 [node name="Timer" type="Timer" parent="." unique_id=1121166706]
 wait_time = 0.06
 autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1847417762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
+mesh = SubResource("BoxMesh_2bop2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=988510612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 0.3711602, 0.0010528564)
+shape = SubResource("BoxShape3D_mdv8j")
+
+[node name="Out" type="Area3D" parent="." unique_id=1981509257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=1088519171]
+shape = SubResource("SphereShape3D_xhbpr")
+debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
+
+[node name="In" type="Area3D" parent="." unique_id=487746930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4842924, -0.60619533)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1678651349]
+shape = SubResource("SphereShape3D_xhbpr")
+debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=674611189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
+curve = SubResource("Curve3D_2ydn3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=716939290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
+mesh = SubResource("BoxMesh_f333s")
+surface_material_override/0 = SubResource("StandardMaterial3D_2bop2")
 
 [connection signal="timeout" from="Timer" to="." method="Spawn"]

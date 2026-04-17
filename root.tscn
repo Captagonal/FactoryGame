@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c4rrherfm87dm"]
+
+[ext_resource type="Script" uid="uid://crqfoey2donk5" path="res://Scripts/GameRunner.cs" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://cl143se62go3d" path="res://Scenes/Conveyor.tscn" id="2_jnlp7"]
+[ext_resource type="PackedScene" uid="uid://di46jbj14qeve" path="res://Scenes/player.tscn" id="2_pyidc"]
+[ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="3_l8v81"]
+[ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector2(50, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pyidc"]
+points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pyidc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_noarx"]
+sky_material = SubResource("ProceduralSkyMaterial_pyidc")
+
+[sub_resource type="Environment" id="Environment_vvh5c"]
+background_mode = 2
+sky = SubResource("Sky_noarx")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Root" type="Node3D" unique_id=1080174873]
+script = ExtResource("1_pq8q7")
+ConveyorScene = ExtResource("2_jnlp7")
+MachineScene = ExtResource("3_l8v81")
+SpawnerScene = ExtResource("4_vyht1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1314850591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=612854146]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=502773590]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Player" parent="." unique_id=611534091 instance=ExtResource("2_pyidc")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=337689945]
+environment = SubResource("Environment_vvh5c")
