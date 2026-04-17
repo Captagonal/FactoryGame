@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctaijtu8xdy0i" path="res://Scripts/Player.cs" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://ddpn6biw7v7d8" path="res://Models/pointer.blend" id="2_cvnsp"]
+[ext_resource type="Theme" uid="uid://vjf8bqnts471" path="res://Theme.tres" id="3_6t5aa"]
 
 [node name="Player" type="Node3D" unique_id=611534091]
 script = ExtResource("1_v0iea")
@@ -15,3 +16,43 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 [node name="RayCast3D" type="RayCast3D" parent="pointer" unique_id=49026326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187, 0)
 target_position = Vector3(0, 2, 0)
+
+[node name="Inventory" type="Control" parent="." unique_id=1661470146 groups=["UI"]]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BuildUI" type="Control" parent="." unique_id=148947368 groups=["UI"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="BuildUI" unique_id=1183891433 groups=["UI"]]
+visible = false
+layout_mode = 0
+offset_left = 912.0
+offset_right = 1147.0
+offset_bottom = 640.0
+border_width = 5.0
+editor_only = false
+
+[node name="Button" type="Button" parent="BuildUI" unique_id=47456041 groups=["UI"]]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 14.0
+offset_right = 1145.0
+offset_bottom = 103.0
+theme = ExtResource("3_6t5aa")
+text = "Conveyor"
+
+[node name="Button2" type="Button" parent="BuildUI" unique_id=32703750 groups=["UI"]]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 146.0
+offset_right = 1144.0
+offset_bottom = 235.0
+theme = ExtResource("3_6t5aa")
+text = "Furnace"

@@ -1,0 +1,5 @@
+[gd_resource type="Theme" format=3 uid="uid://vjf8bqnts471"]
+
+[resource]
+default_font_size = 29
+Button/colors/font_color = Color(0.5010465, 0.8757653, 0.6253254, 1)

@@ -9,10 +9,14 @@ public partial class Player : Node3D
 	private Vector3 _grabPointWorld;
 	private Vector3 _cameraStartPos;
 	private Node3D pointer;
+	private Control InventoryUI, BuildUI;
 	private bool _isPlacingConveyor = false;
+	private bool BuildMode, Inventory = false;
 	public override void _Ready()
 	{
 		pointer = GetNode<Node3D>("pointer");
+		InventoryUI = GetNode<Control>("Inventory");
+		BuildUI = GetNode<Control>("BuildUI");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +31,7 @@ public partial class Player : Node3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
+
 		pointer.GlobalPosition = getMousePointerPosition();
 		if (IsPointerOverUI()){
 			pointer.Visible = false;
@@ -35,11 +40,28 @@ public partial class Player : Node3D
 		{
 			pointer.Visible = true;
 		}
-		
-		if (isPointerConveyor()){
-			GD.Print("Hovering over conveyor"+ targetedConveyor().Name);
-			
+
+		if (Input.IsActionJustPressed("RotateObject")){
+			if (isPointerConveyor()){
+				targetedConveyor().RotateY(Mathf.DegToRad(90));
+			}
 		}
+		if (Input.IsActionJustPressed("BuildMode")){
+			BuildMode = !BuildMode;
+			if (BuildMode){
+				Inventory = false;
+			}
+		}
+		if (Input.IsActionJustPressed("Inventory")){
+			Inventory = !Inventory;
+			if (Inventory){
+				BuildMode = false;
+			}
+		}
+
+		BuildUI.Visible = BuildMode;
+		InventoryUI.Visible = Inventory;
+		
 	}
 	public override void _Input(InputEvent @event)
 	{
@@ -107,21 +129,23 @@ public partial class Player : Node3D
 
 	private bool IsPointerOverUI()
 	{
-		return false;
-		// if (GetViewport() == null)
-		// {
-		// 	return false;
-		// }
-		// Vector2 mousePos = GetViewport().GetMousePosition();
-		// var uiElements = GetTree().GetNodesInGroup("UI");
-		// foreach (var element in uiElements)
-		// {
-		// 	if (element is Control control && control.GetGlobalRect().HasPoint(mousePos))
-		// 	{
-		// 		return true;
-		// 	}
-		// }
 		// return false;
+		if (GetViewport() == null)
+		{
+			return false;
+		}
+		Vector2 mousePos = GetViewport().GetMousePosition();
+		var uiElements = GetTree().GetNodesInGroup("UI");
+		foreach (var element in uiElements)
+		{
+			// GD.Print(element.Name);
+			if (element is Control control && control.GetGlobalRect().HasPoint(mousePos) && control.IsVisibleInTree())
+			{
+				// GD.Print("Pointer is over UI element: " + control.Name);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private bool isPointerConveyor(){
