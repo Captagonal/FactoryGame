@@ -7,7 +7,7 @@ using System.Linq;
 public partial class Conveyor : StaticBody3D
 {
 	// Called when the node enters the scene tree for the first time.
-	public MachineType machineType = MachineType.Furnace;
+	public MachineType machineType = MachineType.Conveyor;
 
 	public Path3D path;
 	private float speed = 1f;
@@ -162,6 +162,7 @@ public partial class Conveyor : StaticBody3D
 }
 public enum MachineType
 {
+	Conveyor,
 	Furnace,
 	Assembler,
 	Crafter

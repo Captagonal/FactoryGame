@@ -24,7 +24,7 @@ size = Vector3(1, 0.1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n3ax"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="Furnace" type="StaticBody3D" unique_id=262583358 groups=["Machine"]]
+[node name="Furnace" type="StaticBody3D" unique_id=262583358 groups=["Conveyor"]]
 script = ExtResource("1_8n3ax")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1820107050]

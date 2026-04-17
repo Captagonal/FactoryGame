@@ -1,6 +1,14 @@
 using Godot;
 using Godot.Collections;
-
+public enum StoryProgress
+{
+	None,
+	Tutorial,
+	Conveyor,
+	Machine,
+	Spawner,
+	Complete
+}
 public partial class GameRunner : Node3D
 {
 	[Export] public PackedScene ConveyorScene;
@@ -9,6 +17,7 @@ public partial class GameRunner : Node3D
 	private const string SavePath = "user://savegame.save";
 	// Called when the node enters the scene tree for the first time.
 	Player player;
+	public Task currentTask = new Task(ItemType.Wood, 5, Destination.Storage);
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
@@ -56,33 +65,17 @@ public partial class GameRunner : Node3D
 		{
 			if (node is Conveyor conveyor) // Assuming your class is named Conveyor
 			{
+				MachineType type = conveyor.machineType;
 				var dict = new Dictionary
 				{
 					{ "Pos", conveyor.GlobalPosition },
 					{ "Rot", conveyor.GlobalRotation },
+					{ "Type", (int)type },
 				};
 				conveyorData.Add(dict);
 			}
 		}
 		saveData["Conveyors"] = conveyorData;
-
-		var machineData = new Array();
-		var machines = GetTree().GetNodesInGroup("Machine");
-
-		foreach (Node node in machines)
-		{
-			if (node is Furnace machine) // Assuming your class is named Conveyor
-			{
-				var dict = new Dictionary
-				{
-					{ "Pos", machine.GlobalPosition },
-					{ "Rot", machine.GlobalRotation },
-					{ "Type", (int)machine.machineType },
-				};
-				machineData.Add(dict);
-			}
-		}
-		saveData["Machines"] = machineData;
 
 		var spawnerData = new Array();
 		var spawners = GetTree().GetNodesInGroup("Spawner");
@@ -101,6 +94,14 @@ public partial class GameRunner : Node3D
 			}
 		}
 		saveData["Spawners"] = spawnerData;
+
+		saveData["Task"] = new Dictionary
+		{
+			{ "amount", currentTask.amount },
+			{ "destination", (int)currentTask.destination },
+			{ "itemType", (int)currentTask.itemType },
+		};
+
 
 		saveFile.StoreVar(saveData);
 	}
@@ -124,20 +125,14 @@ public partial class GameRunner : Node3D
 		// Restore Player
 		player.GlobalTransform = (Transform3D)saveData["Player"];
 
-		// Restore Conveyors
-		var conveyorData = (Array)saveData["Conveyors"];
-		foreach (Dictionary dict in conveyorData)
-		{
-			var conveyor = ConveyorScene.Instantiate<Conveyor>();
-			AddChild(conveyor);
-			conveyor.GlobalPosition = (Vector3)dict["Pos"];
-			conveyor.GlobalRotation = (Vector3)dict["Rot"];
-		}
-		foreach (Dictionary dict in (Array)saveData["Machines"])
+		foreach (Dictionary dict in (Array)saveData["Conveyors"])
 		{
 			MachineType type = (MachineType)(int)dict["Type"];
 			switch (type)
 			{
+				case MachineType.Conveyor:
+					MachineScene = GD.Load<PackedScene>("res://Scenes/Conveyor.tscn");
+					break;
 				case MachineType.Furnace:
 					MachineScene = GD.Load<PackedScene>("res://Scenes/Funrace.tscn");
 					break;
@@ -157,5 +152,7 @@ public partial class GameRunner : Node3D
 			spawner.GlobalRotation = (Vector3)dict["Rot"];
 			spawner.setItemType((ItemType)(int)dict["Type"]);
 		}
+		var taskDict = (Dictionary)saveData["Task"];
+		currentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
 	}
 }
