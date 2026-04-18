@@ -21,4 +21,7 @@ public partial class BuildUi : Control
 		EmitSignalBuild(MachineType.Furnace);
 
 	}
+	public void _on_miner_pressed(){
+		EmitSignalBuild(MachineType.Miner);
+	}
 }

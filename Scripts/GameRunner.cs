@@ -136,7 +136,9 @@ public partial class GameRunner : Node3D
 				case MachineType.Furnace:
 					MachineScene = GD.Load<PackedScene>("res://Scenes/Funrace.tscn");
 					break;
-				// Add cases for other machine types as needed
+				case MachineType.Miner:
+					MachineScene = GD.Load<PackedScene>("res://Scenes/Miner.tscn");
+					break;
 			}
 			var machine = MachineScene.Instantiate<Conveyor>();
 			AddChild(machine);
@@ -154,5 +156,8 @@ public partial class GameRunner : Node3D
 		}
 		var taskDict = (Dictionary)saveData["Task"];
 		currentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
+
+		player.inventory = (Dictionary<ItemType, int>)saveData["Inventory"];
+
 	}
 }

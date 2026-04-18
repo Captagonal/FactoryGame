@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ddpn6biw7v7d8" path="res://Models/pointer.blend" id="2_cvnsp"]
 [ext_resource type="Theme" uid="uid://vjf8bqnts471" path="res://Theme.tres" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://ynw2dgvpkw4d" path="res://Scenes/inventory.tscn" id="3_fkybt"]
-[ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scenes/BuildUi.cs" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scripts/BuildUi.cs" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="4_x3wgy"]
 
 [node name="Player" type="Node3D" unique_id=611534091]
@@ -66,17 +66,24 @@ offset_bottom = 204.0
 theme = ExtResource("3_6t5aa")
 text = "Furnace"
 
-[node name="Furnace2" type="Button" parent="BuildUI" unique_id=248426562 groups=["UI"]]
+[node name="Miner" type="Button" parent="BuildUI" unique_id=248426562 groups=["UI"]]
 layout_mode = 0
 offset_left = 842.0
 offset_top = 218.0
 offset_right = 1121.0
 offset_bottom = 307.0
 theme = ExtResource("3_6t5aa")
-text = "Machine"
+text = "Miner"
+
+[node name="HUD" type="Control" parent="." unique_id=869260517]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="Build" from="BuildUI" to="." method="Build"]
 [connection signal="pressed" from="BuildUI/Conveyor" to="BuildUI" method="_on_conveyor_pressed"]
 [connection signal="pressed" from="BuildUI/Furnace" to="BuildUI" method="_on_furnace_pressed"]
+[connection signal="pressed" from="BuildUI/Miner" to="BuildUI" method="_on_miner_pressed"]
 
 [editable path="Inventory"]

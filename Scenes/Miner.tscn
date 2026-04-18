@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dyx3a1ribh6ji"]
+
+[ext_resource type="Script" uid="uid://dhcr8sah7ybct" path="res://Scripts/Miner.cs" id="1_r6sac"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ws8m"]
+size = Vector3(0.1, 0.8, 0.99)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6sac"]
+size = Vector3(1.0067139, 0.08227539, 1.0332336)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pwjts"]
+radius = 0.25
+
+[sub_resource type="Curve3D" id="Curve3D_qtrrr"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.95568204),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_506d0"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkc6r"]
+albedo_color = Color(0.6199599, 0.5725339, 0.8778756, 1)
+
+[node name="Miner" type="StaticBody3D" unique_id=1839719640 groups=["Conveyor"]]
+script = ExtResource("1_r6sac")
+
+[node name="Timer" type="Timer" parent="." unique_id=919970142]
+wait_time = 0.06
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=73869121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
+mesh = SubResource("BoxMesh_4ws8m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1608377858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 0.3711602, 0.0010528564)
+shape = SubResource("BoxShape3D_r6sac")
+
+[node name="Out" type="Area3D" parent="." unique_id=466952654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Out" unique_id=2069242550]
+shape = SubResource("SphereShape3D_pwjts")
+debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
+
+[node name="In" type="Area3D" parent="." unique_id=1705612362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.94886154, 0.027903318)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="In" unique_id=1005260574]
+shape = SubResource("SphereShape3D_pwjts")
+debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=576663992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
+curve = SubResource("Curve3D_qtrrr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1475019234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
+mesh = SubResource("BoxMesh_506d0")
+surface_material_override/0 = SubResource("StandardMaterial3D_pkc6r")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1565381693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27903306, 0)
+target_position = Vector3(0, -0.725, 0)
+
+[connection signal="timeout" from="Timer" to="." method="Spawn"]

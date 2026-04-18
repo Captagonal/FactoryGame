@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="3_l8v81"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_l8v81"]
+[ext_resource type="PackedScene" uid="uid://d0arxogloflkj" path="res://Scenes/resource_node.tscn" id="7_vyht1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
 albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
@@ -36,6 +37,10 @@ ConveyorScene = ExtResource("2_jnlp7")
 MachineScene = ExtResource("3_l8v81")
 SpawnerScene = ExtResource("4_vyht1")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=969289898]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1314850591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
 mesh = SubResource("PlaneMesh_pq8q7")
@@ -53,5 +58,8 @@ environment = SubResource("Environment_vvh5c")
 
 [node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
+
+[node name="ResourceNode" parent="." unique_id=1379597836 instance=ExtResource("7_vyht1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
 [connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]

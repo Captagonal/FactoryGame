@@ -17,7 +17,6 @@ public partial class Player : Node3D
 		pointer = GetNode<Node3D>("pointer");
 		InventoryUI = GetNode<Control>("Inventory");
 		BuildUI = GetNode<Control>("BuildUI");
-		inventory.Add(ItemType.Wood, 50);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -93,6 +92,9 @@ public partial class Player : Node3D
 						break;
 					case MachineType.Furnace:
 						machineScene = GD.Load<PackedScene>("res://Scenes/Funrace.tscn");
+						break;
+					case MachineType.Miner:
+						machineScene = GD.Load<PackedScene>("res://Scenes/Miner.tscn");
 						break;
 				}
 				if (machineScene != null)

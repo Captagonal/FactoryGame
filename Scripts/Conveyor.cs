@@ -165,5 +165,6 @@ public enum MachineType
 	Conveyor,
 	Furnace,
 	Assembler,
-	Crafter
+	Crafter,
+	Miner
 }
