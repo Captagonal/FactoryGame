@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drdvrc53uh45c"]
 
 [ext_resource type="Script" uid="uid://clt5g8b00s050" path="res://Scripts/Furnace.cs" id="1_8n3ax"]
+[ext_resource type="PackedScene" uid="uid://4kj5lvlevc8i" path="res://Models/Furnace.blend" id="2_5n7jk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8n3ax"]
 size = Vector3(0.1, 0.8, 1)
@@ -17,12 +18,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
-
-[sub_resource type="BoxMesh" id="BoxMesh_00xch"]
-size = Vector3(1, 0.1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n3ax"]
-albedo_color = Color(0, 0, 0, 1)
 
 [node name="Furnace" type="StaticBody3D" unique_id=262583358 groups=["Conveyor"]]
 script = ExtResource("1_8n3ax")
@@ -53,7 +48,14 @@ debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
 curve = SubResource("Curve3D_6lpxl")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1239405404]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
-mesh = SubResource("BoxMesh_00xch")
-surface_material_override/0 = SubResource("StandardMaterial3D_8n3ax")
+[node name="Furnace" parent="." unique_id=822819154 instance=ExtResource("2_5n7jk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029654354, -0.024449706, 0.011942523)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1140046897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+light_energy = 5.265
+light_indirect_energy = 1.405
+light_volumetric_fog_energy = 3.98
+light_size = 0.069
+light_specular = 0.342
+omni_range = 0.29395175

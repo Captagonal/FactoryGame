@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cl143se62go3d"]
 
 [ext_resource type="Script" uid="uid://bwadoo44fxxku" path="res://Scripts/Conveyor.cs" id="1_necmr"]
+[ext_resource type="PackedScene" uid="uid://cjntdb8m3lmp1" path="res://Models/Conveyor.blend" id="2_8lron"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_otof8"]
 size = Vector3(0.1, 0.8, 1)
@@ -21,11 +22,11 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_necmr"]
-size = Vector3(1, 0.1, 1)
-
 [node name="Node3D" type="StaticBody3D" unique_id=746744939 groups=["Conveyor"]]
 script = ExtResource("1_necmr")
+
+[node name="Conveyor" parent="." unique_id=807268369 instance=ExtResource("2_8lron")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=697515509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
@@ -52,7 +53,3 @@ debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)
 [node name="Path3D" type="Path3D" parent="." unique_id=850023270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
 curve = SubResource("Curve3D_necmr")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=120037489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
-mesh = SubResource("BoxMesh_necmr")

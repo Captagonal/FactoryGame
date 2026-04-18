@@ -10,9 +10,9 @@ public partial class Item : RigidBody3D
 	{
 		PackedScene scene = GD.Load<PackedScene>("res://Scenes/Item.tscn");
 		Item item = scene.Instantiate<Item>();
-		item.setType(type);	
+		item.setType(type);
 		item.setSize(size);
-		item.Name = "Item"	;
+		item.Name = "Item";
 		return item;
 	}
 	// Called when the node enters the scene tree for the first time.
@@ -27,26 +27,38 @@ public partial class Item : RigidBody3D
 	public void setType(ItemType newType)
 	{
 		type = newType;
-		MeshInstance3D meshInstance = GetNode<MeshInstance3D>("MeshInstance3D");
+		// MeshInstance3D meshInstance = GetNode<MeshInstance3D>("MeshInstance3D");
+		// switch (type)
+		// {
+		// 	case ItemType.Wood:
+		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/WoodMesh.tres");
+		// 		break;
+		// 	case ItemType.Stone:
+		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/StoneMesh.tres");
+		// 		break;
+		// 	case ItemType.Iron:
+		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/IronMesh.tres");
+		// 		break;
+		// 	case ItemType.Copper:
+		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/CopperMesh.tres");
+		// 		break;
+		// 	case ItemType.Charcoal:
+		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/Coal.blend");
+		// 		break;
+		// }
+		Node3D node = null;
 		switch (type)
 		{
 			case ItemType.Wood:
-				meshInstance.Mesh = GD.Load<Mesh>("res://Models/WoodMesh.tres");
-				break;
-			case ItemType.Stone:
-				meshInstance.Mesh = GD.Load<Mesh>("res://Models/StoneMesh.tres");
-				break;
-			case ItemType.Iron:
-				meshInstance.Mesh = GD.Load<Mesh>("res://Models/IronMesh.tres");
-				break;
-			case ItemType.Copper:
-				meshInstance.Mesh = GD.Load<Mesh>("res://Models/CopperMesh.tres");
+				node = (Node3D)GD.Load<PackedScene>("res://Models/Wood.blend").Instantiate();
 				break;
 			case ItemType.Charcoal:
-				meshInstance.Mesh = GD.Load<Mesh>("res://Models/CharcoalMesh.tres");
+				node = (Node3D)GD.Load<PackedScene>("res://Models/Coal.blend").Instantiate();
 				break;
 		}
-	}	
+		node.Scale = new Vector3(.05f,.05f,.05f);
+		AddChild(node);
+	}
 	public ItemType getType()
 	{
 		return type;
@@ -57,7 +69,8 @@ public partial class Item : RigidBody3D
 	}
 	public void setSize(float newSize)
 	{
-		size = newSize;	}
+		size = newSize;
+	}
 }
 
 public enum ItemType

@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://dyx3a1ribh6ji"]
 
 [ext_resource type="Script" uid="uid://dhcr8sah7ybct" path="res://Scripts/Miner.cs" id="1_r6sac"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_4ws8m"]
-size = Vector3(0.1, 0.8, 0.99)
+[ext_resource type="PackedScene" uid="uid://s1b6pdc6nuxw" path="res://Models/Miner.blend" id="2_pwjts"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r6sac"]
 size = Vector3(1.0067139, 0.08227539, 1.0332336)
@@ -18,22 +16,12 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_506d0"]
-size = Vector3(1, 0.1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkc6r"]
-albedo_color = Color(0.6199599, 0.5725339, 0.8778756, 1)
-
 [node name="Miner" type="StaticBody3D" unique_id=1839719640 groups=["Conveyor"]]
 script = ExtResource("1_r6sac")
 
 [node name="Timer" type="Timer" parent="." unique_id=919970142]
 wait_time = 0.06
 autostart = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=73869121]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
-mesh = SubResource("BoxMesh_4ws8m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1608377858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 0.3711602, 0.0010528564)
@@ -57,13 +45,11 @@ debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
 curve = SubResource("Curve3D_qtrrr")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1475019234]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36524373, 0)
-mesh = SubResource("BoxMesh_506d0")
-surface_material_override/0 = SubResource("StandardMaterial3D_pkc6r")
-
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1565381693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27903306, 0)
 target_position = Vector3(0, -0.725, 0)
+
+[node name="Miner" parent="." unique_id=22327968 instance=ExtResource("2_pwjts")]
+transform = Transform3D(-1.4049999, 0, 1.2151764e-07, 0, 1.9849998, 0, -1.22829e-07, 0, -1.3899999, -0.053101867, 0.6413278, 0.020265669)
 
 [connection signal="timeout" from="Timer" to="." method="Spawn"]
