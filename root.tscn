@@ -62,4 +62,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
 [node name="ResourceNode" parent="." unique_id=1379597836 instance=ExtResource("7_vyht1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
+[node name="ResourceNode2" parent="." unique_id=1969630947 instance=ExtResource("7_vyht1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+
+[node name="ResourceNode3" parent="." unique_id=1593274117 instance=ExtResource("7_vyht1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="ResourceNode4" parent="." unique_id=506951037 instance=ExtResource("7_vyht1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
+Resource = 6
+
 [connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]
