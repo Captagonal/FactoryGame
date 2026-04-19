@@ -11,6 +11,7 @@ public enum StoryProgress
 }
 public partial class GameRunner : Node3D
 {
+	bool loadedResources = false;
 	[Export] public PackedScene ConveyorScene;
 	[Export] public PackedScene MachineScene;
 	[Export] public PackedScene SpawnerScene;
@@ -144,10 +145,11 @@ public partial class GameRunner : Node3D
 
 	private void placeResourceNodes()
 	{
+		if (loadedResources) return;
 		PackedScene node = GD.Load<PackedScene>("res://Scenes/resource_node.tscn");
 		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 		randomNumberGenerator.Seed = (ulong)Seed;
-		int numberOfNodes = 80;
+		int numberOfNodes = 1000;
 		System.Collections.Generic.HashSet<Vector2> usedSpots =
 		[
 			new Vector2(0,0),
@@ -160,18 +162,19 @@ public partial class GameRunner : Node3D
 		{
 			ResourceNode resourceNode = (ResourceNode)node.Instantiate();
 			AddChild(resourceNode);
-			resourceNode.Resource = ItemType.Wood;
+			resourceNode.setType(ItemType.Wood);
 			int x =0;
 			int y = 0;
 			int attempts = 0;
 			while (usedSpots.Contains(new Vector2(x,y)) && attempts < 100){
-				x = randomNumberGenerator.RandiRange(1,20);
-				y = randomNumberGenerator.RandiRange(1,20);
+				x = randomNumberGenerator.RandiRange(-100,100);
+				y = randomNumberGenerator.RandiRange(-100,100);
 				attempts++;
 			}
 			usedSpots.Add(new Vector2I(x, y));
    			resourceNode.Position = new Vector3(x, 0, y);
 
 		}
+		loadedResources = true;
 	}
 }

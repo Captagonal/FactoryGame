@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class Item : RigidBody3D
@@ -15,10 +16,32 @@ public partial class Item : RigidBody3D
 		item.Name = "Item";
 		return item;
 	}
+	public static Dictionary<ItemType, Color> ItemToColor = new Dictionary<ItemType, Color>{
+		{ItemType.Charcoal, Colors.Black},
+		{ItemType.Copper, Colors.Orange},
+		{ItemType.CopperOre, Colors.Orange},
+		{ItemType.Iron, Colors.Silver},
+		{ItemType.IronOre, Colors.Silver},
+		{ItemType.Wood, Colors.SandyBrown},
+		{ItemType.Steel, Colors.DarkGray},
+		{ItemType.Stone, Colors.Gray},
+	};
+	public static Dictionary<ItemType, PackedScene> ItemToModel = new Dictionary<ItemType, PackedScene>{
+		{ItemType.Charcoal, GD.Load<PackedScene>("res://Models/Coal.blend")},
+		{ItemType.Copper, GD.Load<PackedScene>("res://Models/Copper.blend")},
+		{ItemType.CopperOre, GD.Load<PackedScene>("res://Models/CopperOre.blend")},
+		{ItemType.Iron, GD.Load<PackedScene>("res://Models/Iron.blend")},
+		{ItemType.IronOre, GD.Load<PackedScene>("res://Models/IronOre.blend")},
+		{ItemType.Wood, GD.Load<PackedScene>("res://Models/Wood.blend")},
+		{ItemType.Steel, GD.Load<PackedScene>("res://Models/Steel.blend")},
+		// {ItemType.Stone, GD.Load<PackedScene>("res://Models/Stone.blend")},
+	};
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 	}
+
+	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -29,56 +52,16 @@ public partial class Item : RigidBody3D
 		type = newType;
 		foreach (var child in GetChildren())
 		{
-			if (child.IsInGroup("Model")){
+			if (child.IsInGroup("Model"))
+			{
 				child.QueueFree();
 			}
 		}
-		// MeshInstance3D meshInstance = GetNode<MeshInstance3D>("MeshInstance3D");
-		// switch (type)
-		// {
-		// 	case ItemType.Wood:
-		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/WoodMesh.tres");
-		// 		break;
-		// 	case ItemType.Stone:
-		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/StoneMesh.tres");
-		// 		break;
-		// 	case ItemType.Iron:
-		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/IronMesh.tres");
-		// 		break;
-		// 	case ItemType.Copper:
-		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/CopperMesh.tres");
-		// 		break;
-		// 	case ItemType.Charcoal:
-		// 		meshInstance.Mesh = GD.Load<Mesh>("res://Models/Coal.blend");
-		// 		break;
-		// }
-		Node3D node = null;
-		switch (type)
-		{
-			case ItemType.Wood:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/Wood.blend").Instantiate();
-				break;
-			case ItemType.Charcoal:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/Coal.blend").Instantiate();
-				break;
-			case ItemType.Copper:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/Copper.blend").Instantiate();
-				break;
-			case ItemType.CopperOre:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/CopperOre.blend").Instantiate();
-				break;
-			case ItemType.Iron:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/Iron.blend").Instantiate();
-				break;
-			case ItemType.IronOre:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/IronOre.blend").Instantiate();
-				break;
-			case ItemType.Steel:
-				node = (Node3D)GD.Load<PackedScene>("res://Models/Steel.blend").Instantiate();
-				break;
 
-		}
-		node.Scale = new Vector3(.1f,.1f,.1f);
+		Node3D node = null;
+
+		node = ItemToModel[newType].Instantiate<Node3D>();
+		node.Scale = new Vector3(.1f, .1f, .1f);
 		AddChild(node);
 		node.AddToGroup("Model");
 	}

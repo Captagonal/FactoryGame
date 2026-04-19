@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://drdvrc53uh45c" path="res://Scenes/Funrace.tscn" id="3_l8v81"]
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_l8v81"]
-[ext_resource type="PackedScene" uid="uid://d0arxogloflkj" path="res://Scenes/resource_node.tscn" id="7_vyht1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
 albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
@@ -58,26 +57,5 @@ environment = SubResource("Environment_vvh5c")
 
 [node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
-
-[node name="ResourceNode" parent="." unique_id=1379597836 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-
-[node name="ResourceNode2" parent="." unique_id=1969630947 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
-
-[node name="ResourceNode3" parent="." unique_id=1593274117 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
-
-[node name="ResourceNode4" parent="." unique_id=506951037 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
-Resource = 6
-
-[node name="ResourceNode5" parent="." unique_id=570236860 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
-Resource = 3
-
-[node name="ResourceNode6" parent="." unique_id=1024860482 instance=ExtResource("7_vyht1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -10)
-Resource = 5
 
 [connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]
