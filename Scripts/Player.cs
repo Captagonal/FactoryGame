@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -49,8 +50,10 @@ public partial class Player : Node3D
 				targetedConveyor().RotateY(Mathf.DegToRad(90));
 			}
 		}
-		if (Input.IsActionJustPressed("Remove")){
-			if (isPointerConveyor()){
+		if (Input.IsActionJustPressed("Remove"))
+		{
+			if (isPointerConveyor())
+			{
 				targetedConveyor().QueueFree();
 			}
 		}
@@ -141,9 +144,18 @@ public partial class Player : Node3D
 				Vector3 currentMousePos = GetMouseWorldPosition(mouseMotion.Position);
 
 				Vector3 difference = _grabPointWorld - currentMousePos;
-				GlobalPosition = _cameraStartPos + difference;
+				if (isOutOfBounds(_cameraStartPos + difference))
+				{
 
-				_cameraStartPos = GlobalPosition;
+				}
+				else
+				{
+					GlobalPosition = _cameraStartPos + difference;
+
+
+					_cameraStartPos = GlobalPosition;
+				}
+
 			}
 			else if (Input.IsActionPressed("rotate"))
 			{
@@ -246,11 +258,24 @@ public partial class Player : Node3D
 		buildType = type;
 	}
 
-	public void addToInventory(Item item){
-		if (inventory.ContainsKey(item.getType())){
+	public void addToInventory(Item item)
+	{
+		if (inventory.ContainsKey(item.getType()))
+		{
 			inventory[item.getType()] += 1;
-		} else {
+		}
+		else
+		{
 			inventory[item.getType()] = 1;
 		}
+	}
+	private bool isOutOfBounds(Vector3 pos){
+		if (Math.Abs(pos.X) > 220){
+			return true;
+		}
+		if (Math.Abs(pos.Z) > 220){
+			return true;
+		}
+		return false;
 	}
 }

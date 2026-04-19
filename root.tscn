@@ -7,15 +7,72 @@
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_l8v81"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
-albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
+[sub_resource type="Gradient" id="Gradient_l8v81"]
+offsets = PackedFloat32Array(0, 0.9927536, 1)
+colors = PackedColorArray(0.9492754, 0.9492754, 0.9492754, 1, 0.9297146, 0.9297147, 0.9297146, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vyht1"]
+frequency = 0.0062
+offset = Vector3(-1000, 0, 0)
+fractal_octaves = 8
+fractal_lacunarity = 2.065
+fractal_gain = 0.73
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bf3um"]
+noise = SubResource("FastNoiseLite_vyht1")
+color_ramp = SubResource("Gradient_l8v81")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8v81"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.173745, 0.27, 0.0189, 1)
+albedo_texture = SubResource("NoiseTexture2D_bf3um")
+normal_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pq8q7"]
-material = SubResource("StandardMaterial3D_a0tk4")
+material = SubResource("StandardMaterial3D_l8v81")
 size = Vector2(50, 50)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pyidc"]
 points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyht1"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.22214627, 0.3164658, 0.083974175, 1)
+albedo_texture = SubResource("NoiseTexture2D_bf3um")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bf3um"]
+material = SubResource("StandardMaterial3D_vyht1")
+size = Vector2(50, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_huihk"]
+material = SubResource("StandardMaterial3D_vyht1")
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf3um"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.1570144, 0.24833626, 0.016618105, 1)
+albedo_texture = SubResource("NoiseTexture2D_bf3um")
+normal_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gd4vy"]
+material = SubResource("StandardMaterial3D_bf3um")
+size = Vector2(50, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qw60f"]
+material = SubResource("StandardMaterial3D_l8v81")
+size = Vector2(50, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eji0w"]
+material = SubResource("StandardMaterial3D_bf3um")
+size = Vector2(50, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tw3kd"]
+material = SubResource("StandardMaterial3D_vyht1")
+size = Vector2(50, 50)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pyidc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,6 +86,12 @@ background_mode = 2
 sky = SubResource("Sky_noarx")
 tonemap_mode = 2
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 4.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_l8v81"]
+density = -5.75
+edge_fade = 0.0040171025
 
 [node name="Root" type="Node3D" unique_id=1080174873]
 script = ExtResource("1_pq8q7")
@@ -40,13 +103,761 @@ SpawnerScene = ExtResource("4_vyht1")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1314850591]
+[node name="Ground" type="Node3D" parent="." unique_id=143890081]
+
+[node name="Ground" type="Node3D" parent="Ground" unique_id=959339874]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground" unique_id=1314850591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
 mesh = SubResource("PlaneMesh_pq8q7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=612854146]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D" unique_id=612854146]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=502773590]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D/StaticBody3D" unique_id=502773590]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground" unique_id=1073304893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D2" unique_id=1762485561]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D2/StaticBody3D" unique_id=2019947794]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground" unique_id=2049540780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D3" unique_id=356277009]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D3/StaticBody3D" unique_id=816705409]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground" unique_id=1951051058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D4" unique_id=1041246998]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D4/StaticBody3D" unique_id=1800822634]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground" unique_id=455953072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D5" unique_id=271077155]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D5/StaticBody3D" unique_id=238265526]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground" unique_id=350302695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D6" unique_id=1017198019]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D6/StaticBody3D" unique_id=1891245274]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground" unique_id=1508080351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D7" unique_id=744937431]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D7/StaticBody3D" unique_id=284588366]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground" unique_id=759378385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D8" unique_id=1108730518]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D8/StaticBody3D" unique_id=6933833]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground" unique_id=1758220377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground/MeshInstance3D9" unique_id=1565246745]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground/MeshInstance3D9/StaticBody3D" unique_id=1187079768]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground2" type="Node3D" parent="Ground" unique_id=1181059749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground2" unique_id=286176487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D" unique_id=759582948]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D/StaticBody3D" unique_id=1207749183]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground2" unique_id=1358956695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D2" unique_id=1565417186]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D2/StaticBody3D" unique_id=1169694241]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground2" unique_id=385811061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D3" unique_id=1301850849]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D3/StaticBody3D" unique_id=1268664010]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground2" unique_id=2089771628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D4" unique_id=1700640915]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D4/StaticBody3D" unique_id=2073586315]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground2" unique_id=867968760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D5" unique_id=1563083184]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D5/StaticBody3D" unique_id=1324143812]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground2" unique_id=2131013383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D6" unique_id=1022934326]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D6/StaticBody3D" unique_id=1445135948]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground2" unique_id=1906768197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D7" unique_id=2135239941]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D7/StaticBody3D" unique_id=224954295]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground2" unique_id=1992600069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D8" unique_id=1784993256]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D8/StaticBody3D" unique_id=867659169]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground2" unique_id=1881507698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground2/MeshInstance3D9" unique_id=1204985101]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground2/MeshInstance3D9/StaticBody3D" unique_id=912000117]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground3" type="Node3D" parent="Ground" unique_id=681425978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground3" unique_id=881812833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D" unique_id=250227759]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D/StaticBody3D" unique_id=1110713078]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground3" unique_id=864765851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D2" unique_id=1897998929]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D2/StaticBody3D" unique_id=107666400]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground3" unique_id=1004544722]
+transform = Transform3D(0.9998276, -0.0106580565, -0.01520391, 0.010661888, 0.99994314, 0.00017100433, 0.015201222, -0.00033308956, 0.99988437, -0.0021514893, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D3" unique_id=1311064133]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D3/StaticBody3D" unique_id=188921843]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground3" unique_id=656824308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D4" unique_id=1188714535]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D4/StaticBody3D" unique_id=723022652]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground3" unique_id=907611715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D5" unique_id=364549177]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D5/StaticBody3D" unique_id=1203159087]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground3" unique_id=1821529110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D6" unique_id=1877135089]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D6/StaticBody3D" unique_id=373461330]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground3" unique_id=1736716966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D7" unique_id=305146707]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D7/StaticBody3D" unique_id=1018804305]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground3" unique_id=1735916100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D8" unique_id=128446878]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D8/StaticBody3D" unique_id=579169187]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground3" unique_id=439910665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D9" unique_id=102263056]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground3/MeshInstance3D9/StaticBody3D" unique_id=1194162944]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground4" type="Node3D" parent="Ground" unique_id=1945199146]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -150, 0, 150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground4" unique_id=454303610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D" unique_id=1092809353]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D/StaticBody3D" unique_id=154395826]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground4" unique_id=2266593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D2" unique_id=1517514417]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D2/StaticBody3D" unique_id=1554485802]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground4" unique_id=1973945145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D3" unique_id=1349884382]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D3/StaticBody3D" unique_id=774407432]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground4" unique_id=650877359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D4" unique_id=592265601]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D4/StaticBody3D" unique_id=1674672226]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground4" unique_id=742628828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D5" unique_id=1602165489]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D5/StaticBody3D" unique_id=624189899]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground4" unique_id=793703762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D6" unique_id=1010630119]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D6/StaticBody3D" unique_id=839628536]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground4" unique_id=134668681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D7" unique_id=697267011]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D7/StaticBody3D" unique_id=1571338953]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground4" unique_id=526853517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D8" unique_id=264511784]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D8/StaticBody3D" unique_id=1416381621]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground4" unique_id=1722068628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground4/MeshInstance3D9" unique_id=1637696425]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground4/MeshInstance3D9/StaticBody3D" unique_id=1765346580]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground5" type="Node3D" parent="Ground" unique_id=998313750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground5" unique_id=314458580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D" unique_id=2021656788]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D/StaticBody3D" unique_id=1812672574]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground5" unique_id=1746967732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D2" unique_id=703562994]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D2/StaticBody3D" unique_id=577793541]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground5" unique_id=1545747565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D3" unique_id=1436081701]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D3/StaticBody3D" unique_id=355804415]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground5" unique_id=291557631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D4" unique_id=349616146]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D4/StaticBody3D" unique_id=728613187]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground5" unique_id=803888672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D5" unique_id=1521564646]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D5/StaticBody3D" unique_id=685939538]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground5" unique_id=483184540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D6" unique_id=240761137]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D6/StaticBody3D" unique_id=1422337388]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground5" unique_id=661649404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D7" unique_id=751730109]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D7/StaticBody3D" unique_id=604991051]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground5" unique_id=438070063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D8" unique_id=491009624]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D8/StaticBody3D" unique_id=1180454424]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground5" unique_id=1559339350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground5/MeshInstance3D9" unique_id=1407441982]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground5/MeshInstance3D9/StaticBody3D" unique_id=1547198224]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground6" type="Node3D" parent="Ground" unique_id=205777591]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 150, 0, 150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground6" unique_id=1537300528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D" unique_id=1745033005]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D/StaticBody3D" unique_id=523739463]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground6" unique_id=1660790174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D2" unique_id=630250199]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D2/StaticBody3D" unique_id=498224042]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground6" unique_id=1918755280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D3" unique_id=372383753]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D3/StaticBody3D" unique_id=1485221255]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground6" unique_id=2099748102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D4" unique_id=991776155]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D4/StaticBody3D" unique_id=1598514487]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground6" unique_id=661344004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D5" unique_id=122909454]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D5/StaticBody3D" unique_id=1842770271]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground6" unique_id=387857903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D6" unique_id=198021498]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D6/StaticBody3D" unique_id=2098837036]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground6" unique_id=1116400145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D7" unique_id=1406345113]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D7/StaticBody3D" unique_id=299822691]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground6" unique_id=333173711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D8" unique_id=752262387]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D8/StaticBody3D" unique_id=1267996383]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground6" unique_id=2018837518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground6/MeshInstance3D9" unique_id=1827593612]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground6/MeshInstance3D9/StaticBody3D" unique_id=1087775841]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground7" type="Node3D" parent="Ground" unique_id=172926190]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground7" unique_id=555496793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D" unique_id=1417578872]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D/StaticBody3D" unique_id=274932723]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground7" unique_id=998767595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D2" unique_id=1208840367]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D2/StaticBody3D" unique_id=743418648]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground7" unique_id=1424060144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D3" unique_id=1174210323]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D3/StaticBody3D" unique_id=474534179]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground7" unique_id=1900998352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D4" unique_id=615889184]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D4/StaticBody3D" unique_id=1750238409]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground7" unique_id=178185679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D5" unique_id=770835171]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D5/StaticBody3D" unique_id=2145431573]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground7" unique_id=2027190791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D6" unique_id=305930599]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D6/StaticBody3D" unique_id=711074042]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground7" unique_id=509417336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D7" unique_id=13228211]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D7/StaticBody3D" unique_id=2034789818]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground7" unique_id=1662322963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D8" unique_id=146038526]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D8/StaticBody3D" unique_id=1999125580]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground7" unique_id=189041673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground7/MeshInstance3D9" unique_id=749734971]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground7/MeshInstance3D9/StaticBody3D" unique_id=1340455840]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground8" type="Node3D" parent="Ground" unique_id=1418880632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, -150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground8" unique_id=522984435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D" unique_id=2051110209]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D/StaticBody3D" unique_id=134546230]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1208547906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D2" unique_id=1564646238]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D2/StaticBody3D" unique_id=148128778]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1980594482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D3" unique_id=1386621769]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D3/StaticBody3D" unique_id=1306138258]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1466334105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D4" unique_id=461848264]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D4/StaticBody3D" unique_id=1169825349]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1678679440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D5" unique_id=527004066]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D5/StaticBody3D" unique_id=769212085]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground8" unique_id=116733932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D6" unique_id=1319720204]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D6/StaticBody3D" unique_id=882516053]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1120070242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D7" unique_id=1157570930]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D7/StaticBody3D" unique_id=273766999]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground8" unique_id=135362169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D8" unique_id=1364049003]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D8/StaticBody3D" unique_id=2037147624]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground8" unique_id=1240000854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground8/MeshInstance3D9" unique_id=1458484569]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground8/MeshInstance3D9/StaticBody3D" unique_id=1011012098]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="Ground9" type="Node3D" parent="Ground" unique_id=32070920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, -150)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Ground9" unique_id=149532381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D" unique_id=846345295]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D/StaticBody3D" unique_id=966245920]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ground/Ground9" unique_id=527750950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_bf3um")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D2" unique_id=1448136870]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D2/StaticBody3D" unique_id=1718021457]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground9" unique_id=1812507548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_huihk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D3" unique_id=434664739]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D3/StaticBody3D" unique_id=337326072]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ground/Ground9" unique_id=2048116363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_gd4vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D4" unique_id=302111221]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D4/StaticBody3D" unique_id=1208212268]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ground/Ground9" unique_id=430758973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021486282, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D5" unique_id=1527186744]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D5/StaticBody3D" unique_id=776854348]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ground/Ground9" unique_id=70562711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.997852, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_qw60f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D6" unique_id=182316684]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D6/StaticBody3D" unique_id=162611949]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ground/Ground9" unique_id=1755675283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 0.048422813)
+mesh = SubResource("PlaneMesh_eji0w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D7" unique_id=1029650341]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D7/StaticBody3D" unique_id=537808060]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ground/Ground9" unique_id=434840472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, 50.048424)
+mesh = SubResource("PlaneMesh_pq8q7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D8" unique_id=1923505116]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D8/StaticBody3D" unique_id=2107218059]
+shape = SubResource("ConvexPolygonShape3D_pyidc")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ground/Ground9" unique_id=643944704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.002148, 0.0017876625, -49.951576)
+mesh = SubResource("PlaneMesh_tw3kd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground9/MeshInstance3D9" unique_id=314505389]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D9/StaticBody3D" unique_id=1663303158]
 shape = SubResource("ConvexPolygonShape3D_pyidc")
 
 [node name="Player" parent="." unique_id=611534091 instance=ExtResource("2_pyidc")]
@@ -57,5 +868,30 @@ environment = SubResource("Environment_vvh5c")
 
 [node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1099194574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -278.85568, 105.93208, -9.189896)
+size = Vector3(138.7128, 209.87115, 594.3959)
+material = SubResource("FogMaterial_l8v81")
+
+[node name="FogVolume2" type="FogVolume" parent="." unique_id=1679542939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 275.51395, 96.31395, -9.189896)
+size = Vector3(138.7128, 190.63489, 594.3959)
+material = SubResource("FogMaterial_l8v81")
+
+[node name="FogVolume3" type="FogVolume" parent="." unique_id=1530654892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 100.69273, -260.22028)
+size = Vector3(649.4526, 199.39246, 92.335175)
+material = SubResource("FogMaterial_l8v81")
+
+[node name="FogVolume4" type="FogVolume" parent="." unique_id=1585189811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 94.36467, 264.1558)
+size = Vector3(649.4526, 186.73633, 92.335175)
+material = SubResource("FogMaterial_l8v81")
+
+[node name="FogVolume5" type="FogVolume" parent="." unique_id=764978633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5985565, 16.074238, -3.556015)
+size = Vector3(432.9316, 128.46002, 405.2889)
+material = SubResource("FogMaterial_l8v81")
 
 [connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]

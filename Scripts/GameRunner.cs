@@ -168,9 +168,9 @@ public partial class GameRunner : Node3D
 			int x = 0;
 			int y = 0;
 			int attempts = 0;
-			while (usedSpots.Contains(new Vector2(x,y)) && attempts < 100){
-				x = randomNumberGenerator.RandiRange(-100,100);
-				y = randomNumberGenerator.RandiRange(-100,100);
+			while ((usedSpots.Contains(new Vector2(x,y)) && attempts < 100) || (Math.Abs(x) < 20 && Math.Abs(y) < 20)){
+				x = randomNumberGenerator.RandiRange(-220,220);
+				y = randomNumberGenerator.RandiRange(-220,220);
 				attempts++;
 			}
 			usedSpots.Add(new Vector2I(x, y));
