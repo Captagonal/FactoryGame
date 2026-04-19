@@ -27,6 +27,12 @@ public partial class Item : RigidBody3D
 	public void setType(ItemType newType)
 	{
 		type = newType;
+		foreach (var child in GetChildren())
+		{
+			if (child.IsInGroup("Model")){
+				child.QueueFree();
+			}
+		}
 		// MeshInstance3D meshInstance = GetNode<MeshInstance3D>("MeshInstance3D");
 		// switch (type)
 		// {
@@ -55,9 +61,26 @@ public partial class Item : RigidBody3D
 			case ItemType.Charcoal:
 				node = (Node3D)GD.Load<PackedScene>("res://Models/Coal.blend").Instantiate();
 				break;
+			case ItemType.Copper:
+				node = (Node3D)GD.Load<PackedScene>("res://Models/Copper.blend").Instantiate();
+				break;
+			case ItemType.CopperOre:
+				node = (Node3D)GD.Load<PackedScene>("res://Models/CopperOre.blend").Instantiate();
+				break;
+			case ItemType.Iron:
+				node = (Node3D)GD.Load<PackedScene>("res://Models/Iron.blend").Instantiate();
+				break;
+			case ItemType.IronOre:
+				node = (Node3D)GD.Load<PackedScene>("res://Models/IronOre.blend").Instantiate();
+				break;
+			case ItemType.Steel:
+				node = (Node3D)GD.Load<PackedScene>("res://Models/Steel.blend").Instantiate();
+				break;
+
 		}
-		node.Scale = new Vector3(.05f,.05f,.05f);
+		node.Scale = new Vector3(.1f,.1f,.1f);
 		AddChild(node);
+		node.AddToGroup("Model");
 	}
 	public ItemType getType()
 	{
@@ -81,5 +104,6 @@ public enum ItemType
 	IronOre,
 	Copper,
 	CopperOre,
-	Charcoal
+	Charcoal,
+	Steel
 }

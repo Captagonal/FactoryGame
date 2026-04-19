@@ -25,9 +25,6 @@ point_count = 2
 [node name="Node3D" type="StaticBody3D" unique_id=746744939 groups=["Conveyor"]]
 script = ExtResource("1_necmr")
 
-[node name="Conveyor" parent="." unique_id=807268369 instance=ExtResource("2_8lron")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=697515509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012512922, 0)
 mesh = SubResource("BoxMesh_otof8")
@@ -53,3 +50,6 @@ debug_color = Color(0.6119435, 0.37234682, 0.98054, 1)
 [node name="Path3D" type="Path3D" parent="." unique_id=850023270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43087184, -0.45363617)
 curve = SubResource("Curve3D_necmr")
+
+[node name="Conveyor" parent="." unique_id=699353242 instance=ExtResource("2_8lron")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0, 0.15, 0)

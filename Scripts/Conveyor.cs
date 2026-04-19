@@ -59,7 +59,7 @@ public partial class Conveyor : StaticBody3D
 
 		
 
-			item.Position = new Vector3(0, item.getSize() / 2, 0);
+			item.Position = new Vector3(0, item.getSize() / 2 - .2f, 0);
 			item.Rotation = Vector3.Zero; // Keep item from rotating
 
 

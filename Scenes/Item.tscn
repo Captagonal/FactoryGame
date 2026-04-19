@@ -17,4 +17,5 @@ visible = false
 mesh = SubResource("SphereMesh_l6og8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=626563806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18845284, 0)
 shape = SubResource("SphereShape3D_bp1wp")

@@ -17,6 +17,7 @@ public partial class GameRunner : Node3D
 	private const string SavePath = "user://savegame.save";
 	// Called when the node enters the scene tree for the first time.
 	Player player;
+	private int Seed = 24232343;
 	public Task currentTask = new Task(ItemType.Wood, 5, Destination.Storage);
 	public override void _Ready()
 	{
@@ -77,24 +78,6 @@ public partial class GameRunner : Node3D
 		}
 		saveData["Conveyors"] = conveyorData;
 
-		var spawnerData = new Array();
-		var spawners = GetTree().GetNodesInGroup("Spawner");
-
-		foreach (Node node in spawners)
-		{
-			if (node is Spawner spawner) // Assuming your class is named Conveyor
-			{
-				var dict = new Dictionary
-				{
-					{ "Pos", spawner.GlobalPosition },
-					{ "Rot", spawner.GlobalRotation },
-					{ "Type", (int)spawner.getItemType()},
-				};
-				spawnerData.Add(dict);
-			}
-		}
-		saveData["Spawners"] = spawnerData;
-
 		saveData["Task"] = new Dictionary
 		{
 			{ "amount", currentTask.amount },
@@ -102,16 +85,21 @@ public partial class GameRunner : Node3D
 			{ "itemType", (int)currentTask.itemType },
 		};
 		saveData["Inventory"] = player.inventory;
-
+		saveData["seed"] = Seed;
 		saveFile.StoreVar(saveData);
 	}
 	public void LoadGame()
 	{
-		if (!FileAccess.FileExists(SavePath)) return;
+		if (!FileAccess.FileExists(SavePath))
+		{
+			Seed = unchecked((int)GD.Randi());
+			placeResourceNodes();
+			return;
+		}
 
 		using var file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Read);
 		var saveData = (Dictionary)file.GetVar();
-
+		Seed = (int)saveData["seed"];
 		//get rid of old nodes
 		string[] groups = { "Conveyor", "Machine", "Spawner" };
 		foreach (string group in groups)
@@ -146,18 +134,44 @@ public partial class GameRunner : Node3D
 			machine.GlobalRotation = (Vector3)dict["Rot"];
 			machine.machineType = type;
 		}
-		foreach (Dictionary dict in (Array)saveData["Spawners"])
-		{
-			var spawner = SpawnerScene.Instantiate<Spawner>();
-			AddChild(spawner);
-			spawner.GlobalPosition = (Vector3)dict["Pos"];
-			spawner.GlobalRotation = (Vector3)dict["Rot"];
-			spawner.setItemType((ItemType)(int)dict["Type"]);
-		}
+
 		var taskDict = (Dictionary)saveData["Task"];
 		currentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
 
 		player.inventory = (Dictionary<ItemType, int>)saveData["Inventory"];
+		placeResourceNodes();
+	}
 
+	private void placeResourceNodes()
+	{
+		PackedScene node = GD.Load<PackedScene>("res://Scenes/resource_node.tscn");
+		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+		randomNumberGenerator.Seed = (ulong)Seed;
+		int numberOfNodes = 80;
+		System.Collections.Generic.HashSet<Vector2> usedSpots =
+		[
+			new Vector2(0,0),
+			new Vector2(0,1),
+			new Vector2(1,0),
+			new Vector2(1,1),
+		];
+
+		for (int i = 0; i < numberOfNodes; i++)
+		{
+			ResourceNode resourceNode = (ResourceNode)node.Instantiate();
+			AddChild(resourceNode);
+			resourceNode.Resource = ItemType.Wood;
+			int x =0;
+			int y = 0;
+			int attempts = 0;
+			while (usedSpots.Contains(new Vector2(x,y)) && attempts < 100){
+				x = randomNumberGenerator.RandiRange(1,20);
+				y = randomNumberGenerator.RandiRange(1,20);
+				attempts++;
+			}
+			usedSpots.Add(new Vector2I(x, y));
+   			resourceNode.Position = new Vector3(x, 0, y);
+
+		}
 	}
 }
