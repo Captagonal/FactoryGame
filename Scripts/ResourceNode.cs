@@ -19,10 +19,10 @@ public partial class ResourceNode : Node3D
 
 	public void setType(ItemType type){
 		Resource = type;
-		GD.Print("seting mat");
+		// GD.Print("seting mat");
 		StandardMaterial3D mat = new StandardMaterial3D();
 		mat.AlbedoColor = Item.ItemToColor[type];
-		GD.Print(Item.ItemToColor[type]);
+		// GD.Print(Item.ItemToColor[type]);
 		mesh.SetSurfaceOverrideMaterial(0,mat);
 		
 	}

@@ -34,7 +34,7 @@ public partial class Item : RigidBody3D
 		{ItemType.IronOre, GD.Load<PackedScene>("res://Models/IronOre.blend")},
 		{ItemType.Wood, GD.Load<PackedScene>("res://Models/Wood.blend")},
 		{ItemType.Steel, GD.Load<PackedScene>("res://Models/Steel.blend")},
-		// {ItemType.Stone, GD.Load<PackedScene>("res://Models/Stone.blend")},
+		{ItemType.Stone, GD.Load<PackedScene>("res://Models/Steel.blend")},
 	};
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

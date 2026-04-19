@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 public enum StoryProgress
@@ -60,7 +61,7 @@ public partial class GameRunner : Node3D
 
 		saveData[player.Name] = player.GlobalTransform;
 
-		var conveyorData = new Array();
+		var conveyorData = new Godot.Collections.Array();
 		var conveyors = GetTree().GetNodesInGroup("Conveyor");
 
 		foreach (Node node in conveyors)
@@ -114,7 +115,7 @@ public partial class GameRunner : Node3D
 		// Restore Player
 		player.GlobalTransform = (Transform3D)saveData["Player"];
 
-		foreach (Dictionary dict in (Array)saveData["Conveyors"])
+		foreach (Dictionary dict in (Godot.Collections.Array)saveData["Conveyors"])
 		{
 			MachineType type = (MachineType)(int)dict["Type"];
 			switch (type)
@@ -162,8 +163,9 @@ public partial class GameRunner : Node3D
 		{
 			ResourceNode resourceNode = (ResourceNode)node.Instantiate();
 			AddChild(resourceNode);
-			resourceNode.setType(ItemType.Wood);
-			int x =0;
+			resourceNode.setType((ItemType)(randomNumberGenerator.Randi() % Enum.GetNames<ItemType>().Length));
+			// GD.Print(resourceNode.Resource.ToString());
+			int x = 0;
 			int y = 0;
 			int attempts = 0;
 			while (usedSpots.Contains(new Vector2(x,y)) && attempts < 100){
