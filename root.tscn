@@ -7,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://nydjkq8gm70v" path="res://Scenes/spawner.tscn" id="4_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dec6r4oi7eegy" path="res://Scenes/HUB.tscn" id="6_l8v81"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pyidc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_noarx"]
+sky_material = SubResource("ProceduralSkyMaterial_pyidc")
+
+[sub_resource type="Environment" id="Environment_vvh5c"]
+background_mode = 2
+sky = SubResource("Sky_noarx")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 5.0
+
 [sub_resource type="Gradient" id="Gradient_l8v81"]
 offsets = PackedFloat32Array(0, 0.9927536, 1)
 colors = PackedColorArray(0.9492754, 0.9492754, 0.9492754, 1, 0.9297146, 0.9297147, 0.9297146, 1, 1, 1, 1, 1)
@@ -74,20 +89,21 @@ size = Vector2(50, 50)
 material = SubResource("StandardMaterial3D_vyht1")
 size = Vector2(50, 50)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pyidc"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="FogMaterial" id="FogMaterial_vyht1"]
+density = 5.0
+edge_fade = 0.0040171025
 
-[sub_resource type="Sky" id="Sky_noarx"]
-sky_material = SubResource("ProceduralSkyMaterial_pyidc")
+[sub_resource type="FogMaterial" id="FogMaterial_bf3um"]
+density = 5.0
+edge_fade = 0.0040171025
 
-[sub_resource type="Environment" id="Environment_vvh5c"]
-background_mode = 2
-sky = SubResource("Sky_noarx")
-tonemap_mode = 2
-glow_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 4.0
+[sub_resource type="FogMaterial" id="FogMaterial_huihk"]
+density = 5.0
+edge_fade = 0.0040171025
+
+[sub_resource type="FogMaterial" id="FogMaterial_tw3kd"]
+density = 5.0
+edge_fade = 0.0040171025
 
 [sub_resource type="FogMaterial" id="FogMaterial_l8v81"]
 density = -5.75
@@ -102,6 +118,9 @@ SpawnerScene = ExtResource("4_vyht1")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=969289898]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=337689945]
+environment = SubResource("Environment_vvh5c")
 
 [node name="Ground" type="Node3D" parent="." unique_id=143890081]
 
@@ -294,7 +313,7 @@ mesh = SubResource("PlaneMesh_bf3um")
 shape = SubResource("ConvexPolygonShape3D_pyidc")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Ground/Ground3" unique_id=1004544722]
-transform = Transform3D(0.9998276, -0.0106580565, -0.01520391, 0.010661888, 0.99994314, 0.00017100433, 0.015201222, -0.00033308956, 0.99988437, -0.0021514893, 0.0017876625, 50.048424)
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, -0.0021514893, 0.0017876625, 50.048424)
 mesh = SubResource("PlaneMesh_huihk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ground3/MeshInstance3D3" unique_id=1311064133]
@@ -860,38 +879,37 @@ mesh = SubResource("PlaneMesh_tw3kd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground9/MeshInstance3D9/StaticBody3D" unique_id=1663303158]
 shape = SubResource("ConvexPolygonShape3D_pyidc")
 
+[node name="Fog" type="Node3D" parent="." unique_id=1089916841]
+
+[node name="FogVolume" type="FogVolume" parent="Fog" unique_id=1099194574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -286.60315, 105.93208, -9.189896)
+size = Vector3(123.21785, 209.87115, 594.3959)
+material = SubResource("FogMaterial_vyht1")
+
+[node name="FogVolume2" type="FogVolume" parent="Fog" unique_id=1679542939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.28833, 96.31395, -9.189896)
+size = Vector3(119.16402, 190.63489, 594.3959)
+material = SubResource("FogMaterial_bf3um")
+
+[node name="FogVolume3" type="FogVolume" parent="Fog" unique_id=1530654892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 100.69273, -265.65173)
+size = Vector3(649.4526, 199.39246, 81.472275)
+material = SubResource("FogMaterial_huihk")
+
+[node name="FogVolume4" type="FogVolume" parent="Fog" unique_id=1585189811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 94.36467, 274.16458)
+size = Vector3(649.4526, 186.73633, 99.528915)
+material = SubResource("FogMaterial_tw3kd")
+
+[node name="FogVolume5" type="FogVolume" parent="Fog" unique_id=764978633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0861206, 55.47968, 0.39738464)
+size = Vector3(444.95654, 207.2709, 445.0112)
+material = SubResource("FogMaterial_l8v81")
+
 [node name="Player" parent="." unique_id=611534091 instance=ExtResource("2_pyidc")]
 transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3, 2, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=337689945]
-environment = SubResource("Environment_vvh5c")
-
 [node name="Hub" parent="." unique_id=1622989810 instance=ExtResource("6_l8v81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.5)
-
-[node name="FogVolume" type="FogVolume" parent="." unique_id=1099194574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -278.85568, 105.93208, -9.189896)
-size = Vector3(138.7128, 209.87115, 594.3959)
-material = SubResource("FogMaterial_l8v81")
-
-[node name="FogVolume2" type="FogVolume" parent="." unique_id=1679542939]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 275.51395, 96.31395, -9.189896)
-size = Vector3(138.7128, 190.63489, 594.3959)
-material = SubResource("FogMaterial_l8v81")
-
-[node name="FogVolume3" type="FogVolume" parent="." unique_id=1530654892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 100.69273, -260.22028)
-size = Vector3(649.4526, 199.39246, 92.335175)
-material = SubResource("FogMaterial_l8v81")
-
-[node name="FogVolume4" type="FogVolume" parent="." unique_id=1585189811]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.144043, 94.36467, 264.1558)
-size = Vector3(649.4526, 186.73633, 92.335175)
-material = SubResource("FogMaterial_l8v81")
-
-[node name="FogVolume5" type="FogVolume" parent="." unique_id=764978633]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5985565, 16.074238, -3.556015)
-size = Vector3(432.9316, 128.46002, 405.2889)
-material = SubResource("FogMaterial_l8v81")
 
 [connection signal="intakeSignal" from="Hub" to="Player" method="addToInventory"]

@@ -7,6 +7,13 @@
 [ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scripts/BuildUi.cs" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="4_x3wgy"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_x3wgy"]
+font_size = 56
+font_color = Color(0.78, 1, 0.7983333, 1)
+shadow_size = 23
+shadow_color = Color(0, 0.20770809, 0.2021733, 0.7607843)
+shadow_offset = Vector2(2.9, 1)
+
 [node name="Player" type="Node3D" unique_id=611534091]
 script = ExtResource("1_v0iea")
 
@@ -33,6 +40,7 @@ fixed_icon_size = Vector2i(125, 125)
 item_0/icon = ExtResource("4_x3wgy")
 
 [node name="BuildUI" type="Control" parent="." unique_id=148947368 groups=["UI"]]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -80,6 +88,16 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HUD" unique_id=1072080961]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 2.0
+offset_right = 374.0
+offset_bottom = 79.0
+text = "Current Task:
+Deliver 50 Wood to the Hub"
+label_settings = SubResource("LabelSettings_x3wgy")
 
 [connection signal="Build" from="BuildUI" to="." method="Build"]
 [connection signal="pressed" from="BuildUI/Conveyor" to="BuildUI" method="_on_conveyor_pressed"]

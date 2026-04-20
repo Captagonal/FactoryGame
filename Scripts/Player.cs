@@ -9,7 +9,7 @@ public partial class Player : Node3D
 	private Vector3 _grabPointWorld;
 	private Vector3 _cameraStartPos;
 	private Node3D pointer;
-	private Control InventoryUI, BuildUI;
+	private Control InventoryUI, BuildUI, Hud;
 	private bool _isPlacingConveyor = false;
 	private bool BuildMode, Inventory = false;
 	public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
@@ -18,6 +18,7 @@ public partial class Player : Node3D
 		pointer = GetNode<Node3D>("pointer");
 		InventoryUI = GetNode<Control>("Inventory");
 		BuildUI = GetNode<Control>("BuildUI");
+		Hud = GetNode<Control>("HUD");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -81,7 +82,9 @@ public partial class Player : Node3D
 
 		BuildUI.Visible = BuildMode;
 		InventoryUI.Visible = Inventory;
+		Hud.Visible = (!BuildMode && !Inventory);
 
+		
 		if (building)
 		{
 

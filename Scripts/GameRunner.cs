@@ -4,14 +4,16 @@ using Godot.Collections;
 public enum StoryProgress
 {
 	None,
-	Tutorial,
-	Conveyor,
-	Machine,
-	Spawner,
-	Complete
+	TutorialConveyor,
+	TutorialMachine,
+	BloblinNeedsHelp,
+	BloblinNeedsHelp2,
+	BloblinWantsSpace,
+	
 }
 public partial class GameRunner : Node3D
 {
+	StoryProgress progress = StoryProgress.None;
 	bool loadedResources = false;
 	[Export] public PackedScene ConveyorScene;
 	[Export] public PackedScene MachineScene;
@@ -88,6 +90,7 @@ public partial class GameRunner : Node3D
 		};
 		saveData["Inventory"] = player.inventory;
 		saveData["seed"] = Seed;
+		saveData["Progress"] = (int)progress;
 		saveFile.StoreVar(saveData);
 	}
 	public void LoadGame()
@@ -139,11 +142,16 @@ public partial class GameRunner : Node3D
 
 		var taskDict = (Dictionary)saveData["Task"];
 		currentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
-
+		progress = (StoryProgress)(int)saveData["Progress"];
 		player.inventory = (Dictionary<ItemType, int>)saveData["Inventory"];
 		placeResourceNodes();
 	}
-
+	System.Collections.Generic.List<ItemType> itemTypesForNode = [
+		ItemType.Wood,
+		ItemType.Charcoal,
+		ItemType.CopperOre,
+		ItemType.IronOre,
+	];
 	private void placeResourceNodes()
 	{
 		if (loadedResources) return;
@@ -163,7 +171,7 @@ public partial class GameRunner : Node3D
 		{
 			ResourceNode resourceNode = (ResourceNode)node.Instantiate();
 			AddChild(resourceNode);
-			resourceNode.setType((ItemType)(randomNumberGenerator.Randi() % Enum.GetNames<ItemType>().Length));
+			resourceNode.setType(itemTypesForNode[(int)(randomNumberGenerator.Randi() % itemTypesForNode.Count)]);
 			// GD.Print(resourceNode.Resource.ToString());
 			int x = 0;
 			int y = 0;
@@ -178,5 +186,30 @@ public partial class GameRunner : Node3D
 
 		}
 		loadedResources = true;
+	}
+	int completedTasks = 0;
+	private void completeTask(){
+		currentTask = new Task(progress);
+		completedTasks ++;
+		if (completedTasks > 5)
+		{
+			progress = StoryProgress.TutorialConveyor;
+		}
+		if (completedTasks > 10)
+		{
+			progress = StoryProgress.TutorialMachine;
+		}
+		if (completedTasks > 20)
+		{
+			progress = StoryProgress.BloblinNeedsHelp;
+		}
+		if (completedTasks > 50)
+		{
+			progress = StoryProgress.BloblinNeedsHelp2;
+		}
+		if (completedTasks > 70){
+			progress = StoryProgress.BloblinWantsSpace;
+		}
+		
 	}
 }
