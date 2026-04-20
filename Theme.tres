@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://vjf8bqnts471"]
 
 [resource]
-default_font_size = 29
+default_font_size = 57
 Button/colors/font_color = Color(0.5010465, 0.8757653, 0.6253254, 1)
 ItemList/colors/font_color = Color(0.36566824, 0.92458063, 0.68317693, 1)
 ItemList/constants/h_separation = 9

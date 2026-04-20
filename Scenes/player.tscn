@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ynw2dgvpkw4d" path="res://Scenes/inventory.tscn" id="3_fkybt"]
 [ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scripts/BuildUi.cs" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="4_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://bkd5fq88vp604" path="res://Scenes/conversation.tscn" id="7_3smsa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x3wgy"]
 font_size = 56
@@ -40,11 +41,13 @@ fixed_icon_size = Vector2i(125, 125)
 item_0/icon = ExtResource("4_x3wgy")
 
 [node name="BuildUI" type="Control" parent="." unique_id=148947368 groups=["UI"]]
-visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
 offset_bottom = 40.0
+grow_horizontal = 0
 script = ExtResource("3_vgqql")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="BuildUI" unique_id=1183891433 groups=["UI"]]
@@ -58,28 +61,28 @@ editor_only = false
 
 [node name="Conveyor" type="Button" parent="BuildUI" unique_id=47456041 groups=["UI"]]
 layout_mode = 0
-offset_left = 842.0
-offset_top = 14.0
-offset_right = 1122.0
-offset_bottom = 103.0
+offset_left = -290.0
+offset_top = 31.0
+offset_right = -10.0
+offset_bottom = 120.0
 theme = ExtResource("3_6t5aa")
 text = "Conveyor"
 
 [node name="Furnace" type="Button" parent="BuildUI" unique_id=32703750 groups=["UI"]]
 layout_mode = 0
-offset_left = 842.0
-offset_top = 115.0
-offset_right = 1121.0
-offset_bottom = 204.0
+offset_left = -290.0
+offset_top = 132.0
+offset_right = -11.0
+offset_bottom = 221.0
 theme = ExtResource("3_6t5aa")
 text = "Furnace"
 
 [node name="Miner" type="Button" parent="BuildUI" unique_id=248426562 groups=["UI"]]
 layout_mode = 0
-offset_left = 842.0
-offset_top = 218.0
-offset_right = 1121.0
-offset_bottom = 307.0
+offset_left = -290.0
+offset_top = 235.0
+offset_right = -11.0
+offset_bottom = 324.0
 theme = ExtResource("3_6t5aa")
 text = "Miner"
 
@@ -98,6 +101,15 @@ offset_bottom = 79.0
 text = "Current Task:
 Deliver 50 Wood to the Hub"
 label_settings = SubResource("LabelSettings_x3wgy")
+
+[node name="Conversation" parent="HUD" unique_id=455028801 instance=ExtResource("7_3smsa")]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [connection signal="Build" from="BuildUI" to="." method="Build"]
 [connection signal="pressed" from="BuildUI/Conveyor" to="BuildUI" method="_on_conveyor_pressed"]

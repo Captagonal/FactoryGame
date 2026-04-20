@@ -19,6 +19,13 @@ config/icon="res://icon.svg"
 
 SaveManager="*uid://r3d32a0abosb"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+
 [dotnet]
 
 project/assembly_name="FactoryGame"
