@@ -45,6 +45,10 @@ public partial class Conversation : Control
 	{
 		if (Input.IsActionJustPressed("Accept"))
 		{
+			if (!nextLine.IsStopped()) {
+				nextLine.Stop();
+				PlayCurrentLine();
+			}
 			// SkipLine();
 			nextChar.WaitTime = .03;
 		}
@@ -62,6 +66,8 @@ public partial class Conversation : Control
 		Visible = true;
 		this.Lines = Lines;
 		this.Icons = Icons;
+		charIndex = 0;
+		lineIndex = 0;
 		PlayCurrentLine();
 
 	}

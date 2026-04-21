@@ -47,6 +47,7 @@ public class Task
         }
     }
 
+
     public bool TaskCompleted()
     {
         return amount <= 0;

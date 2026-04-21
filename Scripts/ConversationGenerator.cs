@@ -2,14 +2,66 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public class ConversationGenerator {
-    public Dictionary<string, Dictionary<string, Texture2D>> characterToExpression;
-    public static Dictionary<string, Texture2D> TaskToConversation(Task task){
+public class ConversationGenerator
+{
+    public static Dictionary<Character, Dictionary<Expression, Texture2D>> CharacterIcon { get; } = new Dictionary<Character, Dictionary<Expression, Texture2D>> {
+        { Character.Bloblin, new Dictionary<Expression, Texture2D> {
+            {Expression.Suprised, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Happy, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Neutral, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Space, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Sad, GD.Load<Texture2D>("path/to/texture") } }
+        },
+        { Character.Human, new Dictionary<Expression, Texture2D> {
+            {Expression.Happy, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Disapointed, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Suprised, GD.Load<Texture2D>("path/to/texture") } }
+        },
+    };
+    public static Dictionary<string, Texture2D> TaskToConversation(Task task)
+    {
         List<string> Text = new();
         List<Texture2D> Icons = new();
 
-        Text.Add("Hai, How are you?");
-        return null;
+        Text.Add("Hello I was wondering if you could help me");
+        Icons.Add(CharacterIcon[Character.Bloblin][Expression.Neutral]);
+
+        Text.Add("I need you to deliver " + task.amount + " " + task.itemType.ToString() + " to " + task.destination);
+        Icons.Add(CharacterIcon[Character.Bloblin][Expression.Neutral]);
+
+        Text.Add("Thank you so much for your help!!");
+        Icons.Add(CharacterIcon[Character.Bloblin][Expression.Happy]);
+        
+        var result = new Dictionary<string, Texture2D>();
+        for (int i = 0; i < Text.Count; i++)
+        {
+            result[Text[i]] = Icons[i];
+        }
+        return result;
     }
 
+    public static Dictionary<string, Texture2D> introConversation = new Dictionary<string, Texture2D>{
+        {"Haiiii I'm Bloblin",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"I've been alone for a while, so It's REALLY nice to see a new face",CharacterIcon[Character.Bloblin][Expression.Sad] },
+        {"I'm wondering if you could maybe do me a favor?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
+        {"You see its like my all time dream to go to Space",CharacterIcon[Character.Bloblin][Expression.Space] },
+        {"But I have no way to get there",CharacterIcon[Character.Bloblin][Expression.Sad] },
+        {"Maybe you could help though?",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    };
+
+}
+public enum Character
+{
+    Bloblin,
+    Human
+}
+public enum Expression
+{
+    Neutral,
+    Suprised,
+    Happy,
+    Sad,
+    Mad,
+    Disapointed,
+    Space
 }

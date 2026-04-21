@@ -13,12 +13,15 @@ public partial class Player : Node3D
 	private bool _isPlacingConveyor = false;
 	private bool BuildMode, Inventory = false;
 	public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
+	private Conversation conversation;
+	public Task CurrentTask;
 	public override void _Ready()
 	{
 		pointer = GetNode<Node3D>("pointer");
 		InventoryUI = GetNode<Control>("Inventory");
 		BuildUI = GetNode<Control>("BuildUI");
 		Hud = GetNode<Control>("HUD");
+		conversation = Hud.GetNode<Conversation>("Conversation");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,6 +82,9 @@ public partial class Player : Node3D
 				}
 			}
 		}
+		if (Input.IsActionJustPressed("Test")){
+			conversation.start(ConversationGenerator.TaskToConversation(CurrentTask));
+		}
 
 		BuildUI.Visible = BuildMode;
 		InventoryUI.Visible = Inventory;
@@ -112,6 +118,10 @@ public partial class Player : Node3D
 			}
 		}
 
+	}
+
+	public void runConversation(System.Collections.Generic.Dictionary<string, Texture2D> dict){
+		conversation.start(dict);
 	}
 	public override void _Input(InputEvent @event)
 	{

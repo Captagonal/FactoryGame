@@ -26,6 +26,7 @@ public partial class GameRunner : Node3D
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
+		player.CurrentTask = currentTask;
 		// 1. Get the Singleton
 		var saveManager = GetNode<SaveManager>("/root/SaveManager");
 
@@ -97,6 +98,7 @@ public partial class GameRunner : Node3D
 	{
 		if (!FileAccess.FileExists(SavePath))
 		{
+			player.runConversation(ConversationGenerator.introConversation);
 			Seed = unchecked((int)GD.Randi());
 			placeResourceNodes();
 			return;
