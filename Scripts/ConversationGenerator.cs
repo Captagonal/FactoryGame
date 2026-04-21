@@ -6,12 +6,12 @@ public class ConversationGenerator
 {
     public static Dictionary<Character, Dictionary<Expression, Texture2D>> CharacterIcon { get; } = new Dictionary<Character, Dictionary<Expression, Texture2D>> {
         { Character.Bloblin, new Dictionary<Expression, Texture2D> {
-            {Expression.Suprised, GD.Load<Texture2D>("path/to/texture") },
-            {Expression.Disapointed, GD.Load<Texture2D>("path/to/texture") },
-            {Expression.Happy, GD.Load<Texture2D>("path/to/texture") },
-            {Expression.Neutral, GD.Load<Texture2D>("path/to/texture") },
-            {Expression.Space, GD.Load<Texture2D>("path/to/texture") },
-            {Expression.Sad, GD.Load<Texture2D>("path/to/texture") } }
+            {Expression.Suprised, GD.Load<Texture2D>("res://Models/textures/Bloblin/Suprised.png") },
+            {Expression.Disapointed, GD.Load<Texture2D>("res://Models/textures/Bloblin/Disapointed.png") },
+            {Expression.Happy, GD.Load<Texture2D>("res://Models/textures/Bloblin/Happy.png") },
+            {Expression.Neutral, GD.Load<Texture2D>("res://Models/textures/Bloblin/Neutral.png") },
+            {Expression.Space, GD.Load<Texture2D>("res://Models/textures/Bloblin/Space.png") },
+            {Expression.Sad, GD.Load<Texture2D>("res://Models/textures/Bloblin/Sad.png") } }
         },
         { Character.Human, new Dictionary<Expression, Texture2D> {
             {Expression.Happy, GD.Load<Texture2D>("path/to/texture") },

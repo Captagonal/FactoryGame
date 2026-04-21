@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://capngnjaoslvq" path="res://Scripts/Conversation.cs" id="1_ler22"]
 [ext_resource type="Texture2D" uid="uid://cilqtsg24mvs7" path="res://Models/textures/Conversation.png" id="2_6h7vm"]
-[ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="2_e21bn"]
+[ext_resource type="Texture2D" uid="uid://dkvj2lh11admo" path="res://Models/textures/Bloblin/Sad.png" id="2_e21bn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e21bn"]
 font_size = 89
@@ -18,12 +18,13 @@ script = ExtResource("1_ler22")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1336051589]
 layout_mode = 0
-offset_left = 148.0
+offset_left = -2.615
 offset_top = 574.0
-offset_right = 698.0
-offset_bottom = 1124.0
-scale = Vector2(0.76, 0.76)
+offset_right = 1917.385
+offset_bottom = 1654.0
+scale = Vector2(0.39, 0.39)
 texture = ExtResource("2_e21bn")
+expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1130472361]
 layout_mode = 0

@@ -131,8 +131,9 @@ public partial class Player : Node3D
 
 	}
 
-	public void updateTaskVeiw(){
-		TaskView.Text = "Current Task:\nDeliver " +  + CurrentTask.amount + " " + CurrentTask.itemType.ToString() + " to " + CurrentTask.destination;
+	public void updateTaskVeiw()
+	{
+		TaskView.Text = "Current Task:\nDeliver " + +CurrentTask.amount + " " + CurrentTask.itemType.ToString() + " to " + CurrentTask.destination;
 	}
 
 	public void runConversation(System.Collections.Generic.Dictionary<string, Texture2D> dict)
@@ -297,38 +298,49 @@ public partial class Player : Node3D
 		{
 			inventory[item.getType()] = 1;
 		}
-		if (CurrentTask.itemType == item.getType()){
+		if (CurrentTask.itemType == item.getType())
+		{
 			CurrentTask.ProcessTask();
-			if (CurrentTask.TaskCompleted()){
+			if (CurrentTask.TaskCompleted())
+			{
 				completeTask();
 			}
 		}
 	}
 	public int completedTasks = 0;
 	public StoryProgress progress = StoryProgress.None;
-	private void completeTask(){
+	private void completeTask()
+	{
 		CurrentTask = new Task(progress);
-		completedTasks ++;
-		if (completedTasks > 5)
+		completedTasks++;
+		if (completedTasks > 70)
 		{
-			progress = StoryProgress.TutorialConveyor;
-		}
-		if (completedTasks > 10)
-		{
-			progress = StoryProgress.TutorialMachine;
-		}
-		if (completedTasks > 20)
-		{
-			progress = StoryProgress.BloblinNeedsHelp;
+			progress = StoryProgress.BloblinWantsSpace;
+			return;
 		}
 		if (completedTasks > 50)
 		{
 			progress = StoryProgress.BloblinNeedsHelp2;
+			conversation.start(ConversationGenerator.ch2Conversation);
+			return;
 		}
-		if (completedTasks > 70){
-			progress = StoryProgress.BloblinWantsSpace;
+		if (completedTasks > 20)
+		{
+			progress = StoryProgress.BloblinNeedsHelp;
+			conversation.start(ConversationGenerator.ch2Conversation);
+			return;
 		}
-		
+		if (completedTasks > 10)
+		{
+			progress = StoryProgress.TutorialMachine;
+			return;
+		}
+		if (completedTasks > 5)
+		{
+			progress = StoryProgress.TutorialConveyor;
+			return;
+		}
+
 	}
 	private bool isOutOfBounds(Vector3 pos)
 	{
