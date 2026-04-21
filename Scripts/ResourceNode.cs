@@ -10,6 +10,7 @@ public partial class ResourceNode : Node3D
 	public override void _Ready()
 	{
 		mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+		setType(ItemType.Wood);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

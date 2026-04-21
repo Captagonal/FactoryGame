@@ -22,7 +22,7 @@ public partial class Item : RigidBody3D
 		{ItemType.CopperOre, Colors.Orange},
 		{ItemType.Iron, Colors.Silver},
 		{ItemType.IronOre, Colors.Silver},
-		{ItemType.Wood, Colors.SandyBrown},
+		{ItemType.Wood, Colors.SaddleBrown},
 		{ItemType.Steel, Colors.DarkGray},
 		{ItemType.Stone, Colors.Gray},
 	};

@@ -92,7 +92,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="HUD" unique_id=1072080961]
+[node name="Current Task" type="Label" parent="HUD" unique_id=1072080961]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 2.0

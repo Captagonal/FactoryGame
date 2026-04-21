@@ -13,7 +13,7 @@ public enum StoryProgress
 }
 public partial class GameRunner : Node3D
 {
-	StoryProgress progress = StoryProgress.None;
+	
 	bool loadedResources = false;
 	[Export] public PackedScene ConveyorScene;
 	[Export] public PackedScene MachineScene;
@@ -22,11 +22,11 @@ public partial class GameRunner : Node3D
 	// Called when the node enters the scene tree for the first time.
 	Player player;
 	private int Seed = 24232343;
-	public Task currentTask = new Task(ItemType.Wood, 5, Destination.Storage);
+	// public Task currentTask = new Task(ItemType.Wood, 5, Destination.Storage);
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
-		player.CurrentTask = currentTask;
+		player.CurrentTask = new Task(ItemType.Wood, 5, Destination.Storage);;
 		// 1. Get the Singleton
 		var saveManager = GetNode<SaveManager>("/root/SaveManager");
 
@@ -85,13 +85,14 @@ public partial class GameRunner : Node3D
 
 		saveData["Task"] = new Dictionary
 		{
-			{ "amount", currentTask.amount },
-			{ "destination", (int)currentTask.destination },
-			{ "itemType", (int)currentTask.itemType },
+			{ "amount", player.CurrentTask.amount },
+			{ "destination", (int)player.CurrentTask.destination },
+			{ "itemType", (int)player.CurrentTask.itemType },
 		};
 		saveData["Inventory"] = player.inventory;
 		saveData["seed"] = Seed;
-		saveData["Progress"] = (int)progress;
+		saveData["Progress"] = (int)player.progress;
+		saveData["TasksDone"] = (int)player.completedTasks;
 		saveFile.StoreVar(saveData);
 	}
 	public void LoadGame()
@@ -143,9 +144,10 @@ public partial class GameRunner : Node3D
 		}
 
 		var taskDict = (Dictionary)saveData["Task"];
-		currentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
-		progress = (StoryProgress)(int)saveData["Progress"];
+		player.CurrentTask = new Task((ItemType)(int)taskDict["itemType"], (int)taskDict["amount"], (Destination)(int)taskDict["destination"]);
+		player.progress = (StoryProgress)(int)saveData["Progress"];
 		player.inventory = (Dictionary<ItemType, int>)saveData["Inventory"];
+		player.completedTasks = (int)saveData["TasksDone"];
 		placeResourceNodes();
 	}
 	System.Collections.Generic.List<ItemType> itemTypesForNode = [
@@ -189,29 +191,6 @@ public partial class GameRunner : Node3D
 		}
 		loadedResources = true;
 	}
-	int completedTasks = 0;
-	private void completeTask(){
-		currentTask = new Task(progress);
-		completedTasks ++;
-		if (completedTasks > 5)
-		{
-			progress = StoryProgress.TutorialConveyor;
-		}
-		if (completedTasks > 10)
-		{
-			progress = StoryProgress.TutorialMachine;
-		}
-		if (completedTasks > 20)
-		{
-			progress = StoryProgress.BloblinNeedsHelp;
-		}
-		if (completedTasks > 50)
-		{
-			progress = StoryProgress.BloblinNeedsHelp2;
-		}
-		if (completedTasks > 70){
-			progress = StoryProgress.BloblinWantsSpace;
-		}
-		
-	}
+	
+	
 }

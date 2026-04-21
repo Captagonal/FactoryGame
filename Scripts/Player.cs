@@ -10,6 +10,7 @@ public partial class Player : Node3D
 	private Vector3 _cameraStartPos;
 	private Node3D pointer;
 	private Control InventoryUI, BuildUI, Hud;
+	private Label TaskView;
 	private bool _isPlacingConveyor = false;
 	private bool BuildMode, Inventory = false;
 	public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
@@ -22,6 +23,7 @@ public partial class Player : Node3D
 		BuildUI = GetNode<Control>("BuildUI");
 		Hud = GetNode<Control>("HUD");
 		conversation = Hud.GetNode<Conversation>("Conversation");
+		TaskView = Hud.GetNode<Label>("Current Task");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -68,6 +70,11 @@ public partial class Player : Node3D
 			{
 				Inventory = false;
 			}
+			else
+			{
+				building = BuildMode;
+
+			}
 		}
 		if (Input.IsActionJustPressed("Inventory"))
 		{
@@ -82,20 +89,24 @@ public partial class Player : Node3D
 				}
 			}
 		}
-		if (Input.IsActionJustPressed("Test")){
+		if (Input.IsActionJustPressed("Test"))
+		{
 			conversation.start(ConversationGenerator.TaskToConversation(CurrentTask));
 		}
 
 		BuildUI.Visible = BuildMode;
+
 		InventoryUI.Visible = Inventory;
 		Hud.Visible = (!BuildMode && !Inventory);
 
-		
+		updateTaskVeiw();
+
 		if (building)
 		{
 
 			if (Input.IsActionJustPressed("Accept") && !IsPointerOverUI())
 			{
+				building = BuildMode;
 				PackedScene machineScene = null;
 				switch (buildType)
 				{
@@ -120,7 +131,12 @@ public partial class Player : Node3D
 
 	}
 
-	public void runConversation(System.Collections.Generic.Dictionary<string, Texture2D> dict){
+	public void updateTaskVeiw(){
+		TaskView.Text = "Current Task:\nDeliver " +  + CurrentTask.amount + " " + CurrentTask.itemType.ToString() + " to " + CurrentTask.destination;
+	}
+
+	public void runConversation(System.Collections.Generic.Dictionary<string, Texture2D> dict)
+	{
 		conversation.start(dict);
 	}
 	public override void _Input(InputEvent @event)
@@ -281,12 +297,47 @@ public partial class Player : Node3D
 		{
 			inventory[item.getType()] = 1;
 		}
+		if (CurrentTask.itemType == item.getType()){
+			CurrentTask.ProcessTask();
+			if (CurrentTask.TaskCompleted()){
+				completeTask();
+			}
+		}
 	}
-	private bool isOutOfBounds(Vector3 pos){
-		if (Math.Abs(pos.X) > 220){
+	public int completedTasks = 0;
+	public StoryProgress progress = StoryProgress.None;
+	private void completeTask(){
+		CurrentTask = new Task(progress);
+		completedTasks ++;
+		if (completedTasks > 5)
+		{
+			progress = StoryProgress.TutorialConveyor;
+		}
+		if (completedTasks > 10)
+		{
+			progress = StoryProgress.TutorialMachine;
+		}
+		if (completedTasks > 20)
+		{
+			progress = StoryProgress.BloblinNeedsHelp;
+		}
+		if (completedTasks > 50)
+		{
+			progress = StoryProgress.BloblinNeedsHelp2;
+		}
+		if (completedTasks > 70){
+			progress = StoryProgress.BloblinWantsSpace;
+		}
+		
+	}
+	private bool isOutOfBounds(Vector3 pos)
+	{
+		if (Math.Abs(pos.X) > 220)
+		{
 			return true;
 		}
-		if (Math.Abs(pos.Z) > 220){
+		if (Math.Abs(pos.Z) > 220)
+		{
 			return true;
 		}
 		return false;
