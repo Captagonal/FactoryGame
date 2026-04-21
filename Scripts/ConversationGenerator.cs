@@ -7,6 +7,7 @@ public class ConversationGenerator
     public static Dictionary<Character, Dictionary<Expression, Texture2D>> CharacterIcon { get; } = new Dictionary<Character, Dictionary<Expression, Texture2D>> {
         { Character.Bloblin, new Dictionary<Expression, Texture2D> {
             {Expression.Suprised, GD.Load<Texture2D>("path/to/texture") },
+            {Expression.Disapointed, GD.Load<Texture2D>("path/to/texture") },
             {Expression.Happy, GD.Load<Texture2D>("path/to/texture") },
             {Expression.Neutral, GD.Load<Texture2D>("path/to/texture") },
             {Expression.Space, GD.Load<Texture2D>("path/to/texture") },
@@ -31,7 +32,7 @@ public class ConversationGenerator
 
         Text.Add("Thank you so much for your help!!");
         Icons.Add(CharacterIcon[Character.Bloblin][Expression.Happy]);
-        
+
         var result = new Dictionary<string, Texture2D>();
         for (int i = 0; i < Text.Count; i++)
         {
@@ -47,6 +48,19 @@ public class ConversationGenerator
         {"You see its like my all time dream to go to Space",CharacterIcon[Character.Bloblin][Expression.Space] },
         {"But I have no way to get there",CharacterIcon[Character.Bloblin][Expression.Sad] },
         {"Maybe you could help though?",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    };
+    public static Dictionary<string, Texture2D> ch2Conversation = new Dictionary<string, Texture2D>{
+        {"How's it goinggggg",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"You've been working so hard",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"It really means a lot to me...",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Do you think I'm gonna make it to space?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
+        {"I hope I can",CharacterIcon[Character.Bloblin][Expression.Neutral] },
+    };
+    public static Dictionary<string, Texture2D> ch3Conversation = new Dictionary<string, Texture2D>{
+        {"We're almost there",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"I can't believe It's actually happening",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"I'm not even sure if im ready...",CharacterIcon[Character.Bloblin][Expression.Disapointed] },
+        {"Maybe if you come with me?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
     };
 
 }

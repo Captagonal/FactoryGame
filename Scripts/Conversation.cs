@@ -12,12 +12,6 @@ public partial class Conversation : Control
 	Label Text;
 	int charIndex = 0;
 	int lineIndex = 0;
-	public void create(List<string> Lines, List<Texture2D> Icons)
-	{
-		this.Lines = Lines;
-		this.Icons = Icons;
-
-	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -27,17 +21,6 @@ public partial class Conversation : Control
 		nextLine = GetNode<Timer>("NextLine");
 		nextChar.Timeout += OnWriteChar;
 		nextLine.Timeout += PlayCurrentLine;
-	// 	start([
-	// 	"Line 1",
-	// 	"Line 2 sadsadashfkjladh sfkhkjdfhakljfh",
-	// 	"Hahah Silly",
-	// 	"Line 4 which is extra super long",
-	// ], [
-	// 	GD.Load<Texture2D>("res://icon.svg"),
-	// 	GD.Load<Texture2D>("res://icon.svg"),
-	// 	GD.Load<Texture2D>("res://icon.svg"),
-	// 	GD.Load<Texture2D>("res://icon.svg"),
-	// ]);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
