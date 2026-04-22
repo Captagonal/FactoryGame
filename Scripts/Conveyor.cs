@@ -104,6 +104,7 @@ public partial class Conveyor : StaticBody3D
 		}
 
 		var nextArea = Out.GetOverlappingAreas().FirstOrDefault();
+		
 		if (nextArea?.GetParent() is Conveyor targetConveyor && targetConveyor.canFit(item.getSize()))
 		{
 			// Transfer to next conveyor
@@ -165,6 +166,7 @@ public enum MachineType
 	Conveyor,
 	Furnace,
 	Assembler,
+	Refiner,
 	Crafter,
 	Miner
 }

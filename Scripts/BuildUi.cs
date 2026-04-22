@@ -24,4 +24,8 @@ public partial class BuildUi : Control
 	public void _on_miner_pressed(){
 		EmitSignalBuild(MachineType.Miner);
 	}
+
+	public void _on_refiner_pressed(){
+		EmitSignalBuild(MachineType.Refiner);
+	}
 }

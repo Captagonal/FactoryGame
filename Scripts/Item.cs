@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class Item : RigidBody3D
+public partial class Item : Node3D
 {
 	private ItemType type;
 	private float size = 0.5f;

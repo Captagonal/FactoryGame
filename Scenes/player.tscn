@@ -86,6 +86,15 @@ offset_bottom = 324.0
 theme = ExtResource("3_6t5aa")
 text = "Miner"
 
+[node name="Refiner" type="Button" parent="BuildUI" unique_id=341195255 groups=["UI"]]
+layout_mode = 0
+offset_left = -290.0
+offset_top = 340.0
+offset_right = -10.0
+offset_bottom = 429.0
+theme = ExtResource("3_6t5aa")
+text = "Refiner"
+
 [node name="HUD" type="Control" parent="." unique_id=869260517]
 layout_mode = 3
 anchors_preset = 0
@@ -115,5 +124,7 @@ grow_vertical = 0
 [connection signal="pressed" from="BuildUI/Conveyor" to="BuildUI" method="_on_conveyor_pressed"]
 [connection signal="pressed" from="BuildUI/Furnace" to="BuildUI" method="_on_furnace_pressed"]
 [connection signal="pressed" from="BuildUI/Miner" to="BuildUI" method="_on_miner_pressed"]
+[connection signal="pressed" from="BuildUI/Refiner" to="BuildUI" method="_on_refiner_pressed"]
 
+[editable path="pointer"]
 [editable path="Inventory"]

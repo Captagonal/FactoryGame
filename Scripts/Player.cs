@@ -55,6 +55,12 @@ public partial class Player : Node3D
 			{
 				targetedConveyor().RotateY(Mathf.DegToRad(90));
 			}
+			else
+			{
+				GD.Print("rot point");
+				GD.Print(pointer.RotationDegrees);
+				pointer.RotateY(Mathf.DegToRad(90));
+			}
 		}
 		if (Input.IsActionJustPressed("Remove"))
 		{
@@ -73,7 +79,7 @@ public partial class Player : Node3D
 			else
 			{
 				building = BuildMode;
-
+				// TODO: Clear pointer status back to default
 			}
 		}
 		if (Input.IsActionJustPressed("Inventory"))
@@ -104,32 +110,44 @@ public partial class Player : Node3D
 		if (building)
 		{
 
+			// PackedScene machineScene = scenes[buildType];
+			// StandardMaterial3D material3D = new StandardMaterial3D();
+			// material3D.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
+			// material3D.AlbedoColor = new Color(20, 20, 50, 100);
+			// var pointerMesh = pointer.GetNode<MeshInstance3D>("Torus");
+			// pointerMesh.Visible = false;
+			// // pointer.GetNode<MeshInstance3D>("Torus").MaterialOverride = material3D;
+			// var placeholder = machineScene.Instantiate<Conveyor>();
+			// pointer.AddChild(placeholder);
+
+
+
 			if (Input.IsActionJustPressed("Accept") && !IsPointerOverUI())
 			{
-				building = BuildMode;
-				PackedScene machineScene = null;
-				switch (buildType)
+				if (isPointerConveyor())
 				{
-					case MachineType.Conveyor:
-						machineScene = GD.Load<PackedScene>("res://Scenes/Conveyor.tscn");
-						break;
-					case MachineType.Furnace:
-						machineScene = GD.Load<PackedScene>("res://Scenes/Funrace.tscn");
-						break;
-					case MachineType.Miner:
-						machineScene = GD.Load<PackedScene>("res://Scenes/Miner.tscn");
-						break;
+					return;
 				}
+				PackedScene machineScene = scenes[buildType];
+				building = BuildMode;
+				// placeholder.QueueFree();
 				if (machineScene != null)
 				{
 					var MachineInstance = machineScene.Instantiate<Conveyor>();
 					GetParent().AddChild(MachineInstance);
 					MachineInstance.GlobalPosition = new Vector3(Mathf.Round(pointer.GlobalPosition.X), 0.4f, Mathf.Round(pointer.GlobalPosition.Z));
+					MachineInstance.RotationDegrees = new Vector3(0, pointer.RotationDegrees.Y, 0);
 				}
 			}
 		}
 
 	}
+	private static Dictionary<MachineType, PackedScene> scenes = new Dictionary<MachineType, PackedScene>{
+		{MachineType.Conveyor, GD.Load<PackedScene>("res://Scenes/Conveyor.tscn")},
+		{MachineType.Furnace, GD.Load<PackedScene>("res://Scenes/Funrace.tscn")},
+		{MachineType.Miner, GD.Load<PackedScene>("res://Scenes/Miner.tscn")},
+		{MachineType.Refiner, GD.Load<PackedScene>("res://Scenes/refiner	.tscn")},
+	};
 
 	public void updateTaskVeiw()
 	{
@@ -284,8 +302,9 @@ public partial class Player : Node3D
 	public void Build(MachineType type)
 	{
 		// GD.Print("Building " + type);
-		building = true;
 		buildType = type;
+		building = true;
+		//TODO: Set pointer to be a transparent version of the mesh to place down
 	}
 
 	public void addToInventory(Item item)

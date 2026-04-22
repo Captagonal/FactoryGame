@@ -135,6 +135,9 @@ public partial class GameRunner : Node3D
 				case MachineType.Miner:
 					MachineScene = GD.Load<PackedScene>("res://Scenes/Miner.tscn");
 					break;
+				case MachineType.Refiner:
+					MachineScene = GD.Load<PackedScene>("res://Scenes/refiner.tscn");
+					break;
 			}
 			var machine = MachineScene.Instantiate<Conveyor>();
 			AddChild(machine);

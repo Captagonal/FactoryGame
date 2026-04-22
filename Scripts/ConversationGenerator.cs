@@ -41,6 +41,12 @@ public class ConversationGenerator
         return result;
     }
 
+    public static Dictionary<string, Texture2D> tut1 = new Dictionary<string, Texture2D>{
+        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    };
     public static Dictionary<string, Texture2D> introConversation = new Dictionary<string, Texture2D>{
         {"Haiiii I'm Bloblin",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"I've been alone for a while, so It's REALLY nice to see a new face",CharacterIcon[Character.Bloblin][Expression.Sad] },
