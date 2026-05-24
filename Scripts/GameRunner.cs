@@ -9,11 +9,11 @@ public enum StoryProgress
 	BloblinNeedsHelp,
 	BloblinNeedsHelp2,
 	BloblinWantsSpace,
-	
+
 }
 public partial class GameRunner : Node3D
 {
-	
+
 	bool loadedResources = false;
 	[Export] public PackedScene ConveyorScene;
 	[Export] public PackedScene MachineScene;
@@ -26,7 +26,7 @@ public partial class GameRunner : Node3D
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
-		player.CurrentTask = new Task(ItemType.Wood, 5, Destination.Storage);;
+		player.CurrentTask = new Task(ItemType.Wood, 5, Destination.Storage); ;
 		// 1. Get the Singleton
 		var saveManager = GetNode<SaveManager>("/root/SaveManager");
 
@@ -109,14 +109,12 @@ public partial class GameRunner : Node3D
 		var saveData = (Dictionary)file.GetVar();
 		Seed = (int)saveData["seed"];
 		//get rid of old nodes
-		string[] groups = { "Conveyor", "Machine", "Spawner" };
-		foreach (string group in groups)
+
+		foreach (Node node in GetTree().GetNodesInGroup("Conveyor"))
 		{
-			foreach (Node node in GetTree().GetNodesInGroup(group))
-			{
-				node.QueueFree();
-			}
+			node.QueueFree();
 		}
+
 
 		// Restore Player
 		player.GlobalTransform = (Transform3D)saveData["Player"];
@@ -158,6 +156,7 @@ public partial class GameRunner : Node3D
 		ItemType.Charcoal,
 		ItemType.CopperOre,
 		ItemType.IronOre,
+		ItemType.Stone,
 	];
 	private void placeResourceNodes()
 	{
@@ -183,17 +182,18 @@ public partial class GameRunner : Node3D
 			int x = 0;
 			int y = 0;
 			int attempts = 0;
-			while ((usedSpots.Contains(new Vector2(x,y)) && attempts < 100) || (Math.Abs(x) < 20 && Math.Abs(y) < 20)){
-				x = randomNumberGenerator.RandiRange(-220,220);
-				y = randomNumberGenerator.RandiRange(-220,220);
+			while ((usedSpots.Contains(new Vector2(x, y)) && attempts < 100) || (Math.Abs(x) < 20 && Math.Abs(y) < 20))
+			{
+				x = randomNumberGenerator.RandiRange(-220, 220);
+				y = randomNumberGenerator.RandiRange(-220, 220);
 				attempts++;
 			}
 			usedSpots.Add(new Vector2I(x, y));
-   			resourceNode.Position = new Vector3(x, 0, y);
+			resourceNode.Position = new Vector3(x, 0, y);
 
 		}
 		loadedResources = true;
 	}
-	
-	
+
+
 }

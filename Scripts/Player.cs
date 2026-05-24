@@ -146,7 +146,7 @@ public partial class Player : Node3D
 		{MachineType.Conveyor, GD.Load<PackedScene>("res://Scenes/Conveyor.tscn")},
 		{MachineType.Furnace, GD.Load<PackedScene>("res://Scenes/Funrace.tscn")},
 		{MachineType.Miner, GD.Load<PackedScene>("res://Scenes/Miner.tscn")},
-		{MachineType.Refiner, GD.Load<PackedScene>("res://Scenes/refiner	.tscn")},
+		{MachineType.Refiner, GD.Load<PackedScene>("res://Scenes/refiner.tscn")},
 	};
 
 	public void updateTaskVeiw()
@@ -332,18 +332,18 @@ public partial class Player : Node3D
 	{
 		CurrentTask = new Task(progress);
 		completedTasks++;
-		if (completedTasks > 70)
+		if (completedTasks > 25)
 		{
 			progress = StoryProgress.BloblinWantsSpace;
 			return;
 		}
-		if (completedTasks > 50)
+		if (completedTasks > 20)
 		{
 			progress = StoryProgress.BloblinNeedsHelp2;
 			conversation.start(ConversationGenerator.ch2Conversation);
 			return;
 		}
-		if (completedTasks > 20)
+		if (completedTasks > 15)
 		{
 			progress = StoryProgress.BloblinNeedsHelp;
 			conversation.start(ConversationGenerator.ch2Conversation);
