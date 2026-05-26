@@ -2,7 +2,8 @@
 
 Welcome to the Bloblin Space Directive!
 
-![[Screenshot 2026-05-26 143213.png]]
+<img width="1919" height="1041" alt="Screenshot 2026-05-26 143213" src="https://github.com/user-attachments/assets/7b68a23e-ff48-4af8-b941-7b356e3c6796" />
+
 
 Your goal is to complete tasks to progress the story and help Bloblin get to Space
 
