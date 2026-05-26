@@ -41,23 +41,22 @@ public class ConversationGenerator
         return result;
     }
 
-    public static Dictionary<string, Texture2D> tut1 = new Dictionary<string, Texture2D>{
-        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
-    };
+    // public static Dictionary<string, Texture2D> tut1 = new Dictionary<string, Texture2D>{
+    //     {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    //     {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    //     {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    //     {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    // };
     public static Dictionary<string, Texture2D> tut2 = new Dictionary<string, Texture2D>{
-        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Wow you're doing great!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Okay press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"And find the Furnace!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"You can run a belt in to cook ore or wood into coal",CharacterIcon[Character.Bloblin][Expression.Happy] },
     };
     public static Dictionary<string, Texture2D> tut3 = new Dictionary<string, Texture2D>{
-        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Okay Now lets step it up and make a refiner",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"It can take in wood and coal to make steel",CharacterIcon[Character.Bloblin][Expression.Happy] },
     };
     public static Dictionary<string, Texture2D> introConversation = new Dictionary<string, Texture2D>{
         {"Haiiii I'm Bloblin",CharacterIcon[Character.Bloblin][Expression.Happy] },
