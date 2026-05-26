@@ -13,6 +13,10 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="PrismMesh" id="PrismMesh_wmjsf"]
+lightmap_size_hint = Vector2i(6, 11)
+size = Vector3(0.525, 0.53, 0.03)
+
 [node name="Refiner" unique_id=262583358 instance=ExtResource("1_5ajxx")]
 script = ExtResource("2_wmjsf")
 
@@ -29,3 +33,7 @@ debug_color = Color(0.9198989, 0.24663481, 0.35224485, 1)
 [node name="Path3D2" type="Path3D" parent="." index="8" unique_id=1475388870]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.91942585, 0.43087184, -0.435508)
 curve = SubResource("Curve3D_wmjsf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="9" unique_id=1665596936]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2918439, 0)
+mesh = SubResource("PrismMesh_wmjsf")

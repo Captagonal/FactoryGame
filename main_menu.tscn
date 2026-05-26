@@ -1,17 +1,10 @@
 [gd_scene format=3 uid="uid://ciwh48x6p8p0e"]
 
 [ext_resource type="Script" uid="uid://mjn0myumhsln" path="res://MainMenu.cs" id="1_06t4h"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7vrkn"]
-line_spacing = 3.1
-paragraph_spacing = 0.325
-font_size = 75
-shadow_size = 14
-shadow_color = Color(0.7921569, 0, 0, 1)
-shadow_offset = Vector2(3.73, 5.73)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fu7sn"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+[ext_resource type="VideoStream" uid="uid://b5thhnqnufxb" path="res://Models/0016-0108.ogv" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://qbeym4nrec8f" path="res://Models/textures/Bloblin/Space.png" id="3_jix8l"]
+[ext_resource type="FontFile" uid="uid://b5nts1o8y0t2y" path="res://Models/Gamja_Flower/GamjaFlower-Regular.ttf" id="4_glbon"]
+[ext_resource type="LabelSettings" uid="uid://dp8e5lsukumir" path="res://Scenes/new_label_settings.tres" id="4_jix8l"]
 
 [node name="Main Menu" type="Control" unique_id=220812868]
 layout_mode = 3
@@ -22,24 +15,49 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=436469596]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+stream = ExtResource("2_7vrkn")
+autoplay = true
+expand = true
+loop = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2114964790]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1415.1111
+offset_top = -796.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_jix8l")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="." unique_id=1858416934]
 layout_mode = 0
-offset_left = 266.0
-offset_top = 88.0
-offset_right = 441.0
-offset_bottom = 191.0
-text = "haiii"
-label_settings = SubResource("LabelSettings_7vrkn")
-uppercase = true
+offset_left = 30.0
+offset_top = 17.0
+offset_right = 1917.0
+offset_bottom = 455.0
+text = "Welcome to the 
+Bloblin Space Initiative"
+label_settings = ExtResource("4_jix8l")
+autowrap_mode = 2
 
 [node name="Button" type="Button" parent="." unique_id=1176692335]
 layout_mode = 0
-offset_left = 235.0
-offset_top = 263.0
-offset_right = 942.0
-offset_bottom = 436.0
-theme_override_font_sizes/font_size = 104
+offset_left = 30.0
+offset_top = 485.0
+offset_right = 737.0
+offset_bottom = 658.0
+theme_override_colors/font_color = Color(0.8686217, 0.87284654, 0.901504, 1)
+theme_override_fonts/font = ExtResource("4_glbon")
+theme_override_font_sizes/font_size = 180
 text = "Load Game"
-icon = SubResource("CompressedTexture2D_fu7sn")
 
 [connection signal="pressed" from="Button" to="." method="LoadGame"]

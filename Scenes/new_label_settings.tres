@@ -1,0 +1,16 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://dp8e5lsukumir"]
+
+[ext_resource type="FontFile" uid="uid://b5nts1o8y0t2y" path="res://Models/Gamja_Flower/GamjaFlower-Regular.ttf" id="1_r6h3r"]
+
+[resource]
+line_spacing = 3.28
+paragraph_spacing = 0.325
+font = ExtResource("1_r6h3r")
+font_size = 191
+shadow_size = 32
+shadow_color = Color(0.05859915, 0.14245373, 0.14170015, 1)
+shadow_offset = Vector2(3.73, 5.73)
+stacked_shadow_count = 1
+stacked_shadow_0/offset = Vector2(-5, 0)
+stacked_shadow_0/color = Color(0.01696883, 0.095186196, 0.09910958, 1)
+stacked_shadow_0/outline_size = 10
