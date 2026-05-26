@@ -84,10 +84,8 @@ public class ConversationGenerator
         {"Maybe if you come with me?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
     };
     public static Dictionary<string, Texture2D> end = new Dictionary<string, Texture2D>{
-        {"We're almost there",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"I can't believe It's actually happening",CharacterIcon[Character.Bloblin][Expression.Happy] },
-        {"I'm not even sure if im ready...",CharacterIcon[Character.Bloblin][Expression.Disapointed] },
-        {"Maybe if you come with me?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
+        {"We DID it!!",CharacterIcon[Character.Bloblin][Expression.Space] },
+        {"Are you ready to go?",CharacterIcon[Character.Bloblin][Expression.Space] },
     };
 
 }

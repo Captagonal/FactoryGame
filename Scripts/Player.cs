@@ -29,6 +29,11 @@ public partial class Player : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		Camera3D camera3D = GetNode<Camera3D>("Camera3D");
+
+		// GD.Print(Position);
+		// GD.Print(RotationDegrees);
+		// GD.Print(camera3D.RotationDegrees);	
 		if (Input.IsActionPressed("rotate") && !Input.IsKeyPressed(Key.Shift))
 		{
 			Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -97,7 +102,8 @@ public partial class Player : Node3D
 		}
 		if (Input.IsActionJustPressed("Test"))
 		{
-			conversation.start(ConversationGenerator.TaskToConversation(CurrentTask));
+			completedTasks = 25;
+			completeTask();
 		}
 
 		BuildUI.Visible = BuildMode;
@@ -336,8 +342,35 @@ public partial class Player : Node3D
 		{
 			progress = StoryProgress.BloblinWantsSpace;
 			//END GAME
-			conversation.start(ConversationGenerator.end);
+			// (4.5938373, 3.192306, 3.3522)
+			// (-0, 56.587936, 0)
+			// (-21.485928, 0, 0)
 
+			Camera3D camera3D = GetNode<Camera3D>("Camera3D");
+
+			conversation.start(ConversationGenerator.end);
+			Tween tween = GetTree().CreateTween();
+			Tween tween1 = GetTree().CreateTween();
+			Tween tween2 = GetTree().CreateTween();
+			tween.TweenProperty(this, "position", new Vector3(4.5938373f, 3.192306f, 3.3522f), 5);
+			tween1.TweenProperty(this, "rotation_degrees", new Vector3(0, 56.587936f, 0), 5);
+			tween2.TweenProperty(camera3D, "rotation_degrees", new Vector3(-21.485928f, 0, 0), 5);
+			SceneTreeTimer timer = GetTree().CreateTimer(5);
+			timer.Timeout += () =>
+			{
+				Tween RocketTween = GetTree().CreateTween();
+				RocketTween.TweenProperty(GetNode<Node3D>("%Rocket"), "position", new Vector3(4.5938373f, 100, 3.3522f), 15);
+
+				GetTree().CreateTimer(1).Timeout += () =>
+				{
+					Tween playerTween = GetTree().CreateTween();
+					playerTween.TweenProperty(this, "position", new Vector3(20, 100, 3.3522f), 16);
+				};
+				GetTree().CreateTimer(13).Timeout += () =>
+				{
+					GetTree().Quit();
+				};
+			};
 			return;
 		}
 		if (completedTasks > 20)
