@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://q4rb4ddvid46" path="res://Scripts/BuildUi.cs" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://3kc5k1hk63pc" path="res://icon.svg" id="4_x3wgy"]
 [ext_resource type="PackedScene" uid="uid://bkd5fq88vp604" path="res://Scenes/conversation.tscn" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://c8wvuil4b1jvj" path="res://Scripts/Pause.cs" id="8_f1ek2"]
+[ext_resource type="FontFile" uid="uid://b5nts1o8y0t2y" path="res://Models/Gamja_Flower/GamjaFlower-Regular.ttf" id="9_tx1dd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x3wgy"]
 font_size = 56
@@ -120,11 +122,48 @@ anchor_right = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 
+[node name="Pause" type="Control" parent="." unique_id=632227643]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_f1ek2")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pause" unique_id=2074929811]
+color = Color(0.032259353, 0.032259353, 0.032259353, 0.7294118)
+polygon = PackedVector2Array(-309, 1207, 2173, 1221, 2022, -148, -289, -212)
+
+[node name="Button" type="Button" parent="Pause" unique_id=1144413267]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 485.0
+offset_right = 737.0
+offset_bottom = 658.0
+theme_override_colors/font_color = Color(0.8686217, 0.87284654, 0.901504, 1)
+theme_override_fonts/font = ExtResource("9_tx1dd")
+theme_override_font_sizes/font_size = 180
+text = "Quit Game"
+
+[node name="Button2" type="Button" parent="Pause" unique_id=568162317]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 228.0
+offset_right = 739.0
+offset_bottom = 417.0
+theme_override_colors/font_color = Color(0.8686217, 0.87284654, 0.901504, 1)
+theme_override_fonts/font = ExtResource("9_tx1dd")
+theme_override_font_sizes/font_size = 180
+text = "Return"
+
 [connection signal="Build" from="BuildUI" to="." method="Build"]
 [connection signal="pressed" from="BuildUI/Conveyor" to="BuildUI" method="_on_conveyor_pressed"]
 [connection signal="pressed" from="BuildUI/Furnace" to="BuildUI" method="_on_furnace_pressed"]
 [connection signal="pressed" from="BuildUI/Miner" to="BuildUI" method="_on_miner_pressed"]
 [connection signal="pressed" from="BuildUI/Refiner" to="BuildUI" method="_on_refiner_pressed"]
+[connection signal="pressed" from="Pause/Button" to="Pause" method="quit"]
+[connection signal="pressed" from="Pause/Button2" to="Pause" method="ReturnToGame"]
 
 [editable path="pointer"]
 [editable path="Inventory"]

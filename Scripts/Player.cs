@@ -16,6 +16,7 @@ public partial class Player : Node3D
 	public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
 	private Conversation conversation;
 	public Task CurrentTask;
+
 	public override void _Ready()
 	{
 		pointer = GetNode<Node3D>("pointer");
@@ -104,6 +105,13 @@ public partial class Player : Node3D
 		{
 			completedTasks = 25;
 			completeTask();
+		}
+		if (Input.IsActionJustPressed("Pause"))
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+
+			GetNode<Control>("Pause").Visible = true;
+			GetTree().Paused = true;
 		}
 
 		BuildUI.Visible = BuildMode;
@@ -220,15 +228,7 @@ public partial class Player : Node3D
 				camera3D.Rotation = camRotation;
 			}
 		}
-		else if (@event is InputEventKey keyEvent && keyEvent.IsPressed() && keyEvent.Keycode == Key.Escape)
-		{
 
-
-			Input.MouseMode = Input.MouseModeEnum.Visible;
-			// GetParent().GetNode<Control>("Settings").Visible = true;
-			GetTree().Paused = true;
-
-		}
 	}
 	private Vector3 GetMouseWorldPosition(Vector2 mousePos)
 	{
