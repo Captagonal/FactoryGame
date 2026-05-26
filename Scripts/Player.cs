@@ -335,12 +335,15 @@ public partial class Player : Node3D
 		if (completedTasks > 25)
 		{
 			progress = StoryProgress.BloblinWantsSpace;
+			//END GAME
+			conversation.start(ConversationGenerator.end);
+
 			return;
 		}
 		if (completedTasks > 20)
 		{
 			progress = StoryProgress.BloblinNeedsHelp2;
-			conversation.start(ConversationGenerator.ch2Conversation);
+			conversation.start(ConversationGenerator.ch3Conversation);
 			return;
 		}
 		if (completedTasks > 15)
@@ -352,11 +355,15 @@ public partial class Player : Node3D
 		if (completedTasks > 10)
 		{
 			progress = StoryProgress.TutorialMachine;
+			conversation.start(ConversationGenerator.tut3);
+
 			return;
 		}
 		if (completedTasks > 5)
 		{
 			progress = StoryProgress.TutorialConveyor;
+			conversation.start(ConversationGenerator.tut2);
+
 			return;
 		}
 

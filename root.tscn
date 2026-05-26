@@ -9,11 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://d0arxogloflkj" path="res://Scenes/resource_node.tscn" id="7_vyht1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pyidc"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_horizon_color = Color(0.57275164, 0.7114003, 0.60824, 1)
+sky_curve = 0.3
+sky_energy_multiplier = 1.05
+ground_bottom_color = Color(0.100381024, 0.20112365, 0.12336052, 1)
+ground_horizon_color = Color(0.618107, 0.69279504, 0.6442205, 1)
+ground_curve = 0.0073204036
 
 [sub_resource type="Sky" id="Sky_noarx"]
 sky_material = SubResource("ProceduralSkyMaterial_pyidc")
+radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_vvh5c"]
 background_mode = 2
@@ -21,7 +26,7 @@ sky = SubResource("Sky_noarx")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 5.0
+volumetric_fog_density = 5.42
 
 [sub_resource type="Gradient" id="Gradient_l8v81"]
 offsets = PackedFloat32Array(0, 0.9927536, 1)
@@ -98,9 +103,16 @@ edge_fade = 0.0040171025
 density = 5.0
 edge_fade = 0.0040171025
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bf3um"]
+frequency = 0.0017
+offset = Vector3(222.22, 0, 0)
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_huihk"]
+noise = SubResource("FastNoiseLite_bf3um")
+
 [sub_resource type="FogMaterial" id="FogMaterial_huihk"]
 density = 5.0
-edge_fade = 0.0040171025
+density_texture = SubResource("NoiseTexture3D_huihk")
 
 [sub_resource type="FogMaterial" id="FogMaterial_tw3kd"]
 density = 5.0

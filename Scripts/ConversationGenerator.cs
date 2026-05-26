@@ -47,6 +47,18 @@ public class ConversationGenerator
         {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
     };
+    public static Dictionary<string, Texture2D> tut2 = new Dictionary<string, Texture2D>{
+        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    };
+    public static Dictionary<string, Texture2D> tut3 = new Dictionary<string, Texture2D>{
+        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
+    };
     public static Dictionary<string, Texture2D> introConversation = new Dictionary<string, Texture2D>{
         {"Haiiii I'm Bloblin",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"I've been alone for a while, so It's REALLY nice to see a new face",CharacterIcon[Character.Bloblin][Expression.Sad] },
@@ -54,6 +66,10 @@ public class ConversationGenerator
         {"You see its like my all time dream to go to Space",CharacterIcon[Character.Bloblin][Expression.Space] },
         {"But I have no way to get there",CharacterIcon[Character.Bloblin][Expression.Sad] },
         {"Maybe you could help though?",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"First lets teach you how to use conveyors!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Press \"F\" to open the build menu",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"And then select conveyor!!",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"Now click on the world to add it to the world",CharacterIcon[Character.Bloblin][Expression.Happy] },
     };
     public static Dictionary<string, Texture2D> ch2Conversation = new Dictionary<string, Texture2D>{
         {"How's it goinggggg",CharacterIcon[Character.Bloblin][Expression.Happy] },
@@ -63,6 +79,12 @@ public class ConversationGenerator
         {"I hope I can",CharacterIcon[Character.Bloblin][Expression.Neutral] },
     };
     public static Dictionary<string, Texture2D> ch3Conversation = new Dictionary<string, Texture2D>{
+        {"We're almost there",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"I can't believe It's actually happening",CharacterIcon[Character.Bloblin][Expression.Happy] },
+        {"I'm not even sure if im ready...",CharacterIcon[Character.Bloblin][Expression.Disapointed] },
+        {"Maybe if you come with me?",CharacterIcon[Character.Bloblin][Expression.Neutral] },
+    };
+    public static Dictionary<string, Texture2D> end = new Dictionary<string, Texture2D>{
         {"We're almost there",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"I can't believe It's actually happening",CharacterIcon[Character.Bloblin][Expression.Happy] },
         {"I'm not even sure if im ready...",CharacterIcon[Character.Bloblin][Expression.Disapointed] },

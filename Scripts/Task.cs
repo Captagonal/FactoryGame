@@ -24,23 +24,34 @@ public class Task
                 //starting tutorial
                 options = [ItemType.Wood, ItemType.Charcoal, ItemType.CopperOre, ItemType.IronOre];
                 itemType = options[GD.Randi() % options.Length];
-                amount = (int)(GD.Randi() % 50);
+                amount = (int)(GD.Randi() % 20);
                 destination = Destination.Storage;
                 break;
             case StoryProgress.TutorialConveyor:
                 //Learning Machines
                 options = [ItemType.Iron, ItemType.Copper];
                 itemType = options[GD.Randi() % options.Length];
-                amount = (int)(GD.Randi() % 70);
+                amount = (int)(GD.Randi() % 50);
                 destination = Destination.Storage;
                 break;
             case StoryProgress.TutorialMachine:
                 //Can Use Machines
-                
+                options = [ItemType.Iron, ItemType.Copper];
+                itemType = options[GD.Randi() % options.Length];
+                amount = (int)(GD.Randi() % 50);
+                destination = Destination.Storage;
                 break;
             case StoryProgress.BloblinNeedsHelp:
+                options = [ItemType.Iron, ItemType.Copper];
+                itemType = options[GD.Randi() % options.Length];
+                amount = (int)(GD.Randi() % 50);
+                destination = Destination.Storage;
                 break;
             case StoryProgress.BloblinNeedsHelp2:
+                options = [ItemType.Steel];
+                itemType = options[GD.Randi() % options.Length];
+                amount = (int)(GD.Randi() % 50);
+                destination = Destination.Storage;
                 break;
             case StoryProgress.BloblinWantsSpace:
                 break;

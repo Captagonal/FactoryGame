@@ -10,7 +10,7 @@ public partial class Conveyor : StaticBody3D
 	public MachineType machineType = MachineType.Conveyor;
 
 	public Path3D path;
-	private float speed = 1f;
+	public float speed = 1f;
 	private Area3D Out, In;
 	private Conveyor nextConveyor;
 
@@ -89,7 +89,7 @@ public partial class Conveyor : StaticBody3D
 		}
 	}
 
-	private void TryTransferItem(PathFollow3D pathFollow)
+	public void TryTransferItem(PathFollow3D pathFollow)
 	{
 		Item item = pathFollow.GetNodeOrNull<Item>("Item");
 		if (item == null)
@@ -118,7 +118,7 @@ public partial class Conveyor : StaticBody3D
 			pathFollow.QueueFree();
 		}
 	}
-	public bool canFit(float size)
+	public virtual bool canFit(float size, ItemType type = ItemType.Wood)
 	{
 		var firstItem = path.GetChildren()
 							 .OfType<PathFollow3D>()
@@ -129,7 +129,7 @@ public partial class Conveyor : StaticBody3D
 		return firstItem.Progress > size;
 
 	}
-	public void TakeInItem(Item item)
+	public virtual void TakeInItem(Item item)
 	{
 		if (path == null)
 		{
